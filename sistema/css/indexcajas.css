@@ -1,0 +1,77 @@
+a {
+    text-decoration: none;
+}
+#backModal{
+    position: absolute;
+    top: 0;
+    background: rgba(75, 75, 75, 0.452);
+    height: 100%;
+    width: 100%;
+    z-index: 99998;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    display: none;
+    padding: 50px;
+}
+
+.drower{
+    width: 30%;
+    background: white;
+    border-radius: 8px;
+    padding: 1%;
+}
+
+.cajaInputs{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.inputBox{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    align-self: flex-end;
+
+}
+
+#inputApertura{
+    width: 100px;
+}
+
+.inputSaldo{
+    width: 40%;
+}
+
+.saldoBox{
+    display: flex;
+    width: 30%;
+}
+
+#cajaDiaria{
+    display: none;
+}
+
+#arqueoCaja{
+    position: absolute;
+    top: 0;
+    background: rgba(75, 75, 75, 0.452);
+    height: 100%;
+    width: 100%;
+    z-index: 99998;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    display: none;
+    padding: 50px;
+}
+
+.drowerArqueo{
+    width: 90%;
+    height: 100%;
+    background: white;
+    border-radius: 8px;
+    padding: 10px;
+}
