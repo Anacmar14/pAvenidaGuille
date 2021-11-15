@@ -45,7 +45,7 @@ include ("../../procesos/check/check.php");
                     include ("../../../sistema/sesion/alerta.php");
                 ?>
 
-                <div class="card card-body">
+                <div class="card card-body oc">
                     <form action="../../../sistema/procesos/save/savearticulos.php" method="POST">
                         <div class="form-group">
                             <h6>AGREGAR UN NUEVO PRODUCTO</h6>

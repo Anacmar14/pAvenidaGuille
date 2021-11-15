@@ -108,7 +108,7 @@ $(document).ready(function () {
       ],
     });
     function reloadTablaHistorial() {
-      opcion = 4;
+      opcion = 8;
       tablaHistorialVentas = $("#tablaHistorialVentas").DataTable({
         lengthMenu: [[6], [6]],
         language: {
@@ -175,7 +175,7 @@ $(document).ready(function () {
           { data: "clnom" },
           { data: "fvtotal" },
           { defaultContent:
-              "<div class='dt-buttons btn-group style='flex-wrap: nowrap' '><button class='btn btn-primary btn-sm btnVerMasDetalleVenta' title='Ver Mas'><i class='material-icons'>remove_red_eye</i></button><div class='oc'><button class='btn btn-danger btn-sm btnOcultarVenta' title='Anular Venta'><i class='material-icons'>block</i></button></div></div>",
+              "<div class='dt-buttons btn-group style='flex-wrap: nowrap' '><button class='btn btn-primary btn-sm btnVerMasDetalleVenta' title='Ver Mas'><i class='material-icons'>remove_red_eye</i></button><div class='oc'></div>",
           },
 
         ],

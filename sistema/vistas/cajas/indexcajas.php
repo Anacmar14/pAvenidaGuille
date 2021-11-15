@@ -39,7 +39,7 @@ include ("../../procesos/check/check.php");
 
     <div class="container p-4"> 
         <div class="form-group" style="text-align: center">
-            <h3>DATOS DE LA CAJA DE HOY 08/11/2021 </h3>
+            <h3>DATOS DE LA CAJA DE HOY</h3>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -54,13 +54,13 @@ include ("../../procesos/check/check.php");
                                             <div class='input-group-prepend'>
                                                 <span class='input-group-text'>Fecha y Hora:</span>
                                             </div>
-                                            <label id='totalModalLabel' class='form-control' style='margin-bottom: 0;'></label>
+                                            <input type="text" class="form-control inputFecha" disabled style='width: auto;'>
                                         </div>
                                         <div class='totalDivCol' style="display: flex; align-items: center; margin-right: 0px; padding: 5px;">
                                             <div class='input-group-prepend'>
                                                 <span class='input-group-text'>Cajero:</span>
                                             </div>
-                                            <label id='totalModalLabel' class='form-control' style='margin-bottom: 0;'></label>
+                                            <input type="text" class="form-control inputCajero" disabled style='width:100px;'>
                                         </div>
                                         <div class='totalDivCol' style="display: flex; align-items: center; margin-right: 0px; padding: 5px;">
                                             <div class='input-group-prepend'>
@@ -73,6 +73,32 @@ include ("../../procesos/check/check.php");
                                                 <span class='input-group-text'>Saldo:</span>
                                             </div>
                                             <input type="text" class="form-control inputSaldo" placeholder="Saldo" disabled>
+                                        </div>
+                                </div>
+                                <div class="justify-content-between" style="display: flex; flex-direction: row;">
+                                        <div class='totalDivCol' style="display: flex; align-items: center; margin-right: 0px; padding: 5px;">
+                                            <div class='input-group-prepend'>
+                                                <span class='input-group-text'>Ingresos Ventas:</span>
+                                            </div>
+                                            <input type="text" class="form-control inputIngVen" placeholder="0" disabled style='width: 100px;'>
+                                        </div>
+                                        <div class='totalDivCol' style="display: flex; align-items: center; margin-right: 0px; padding: 5px;">
+                                            <div class='input-group-prepend'>
+                                                <span class='input-group-text'>Egresos Compras:</span>
+                                            </div>
+                                            <input type="text" class="form-control inputEgrComp" placeholder="0" disabled style='width:100px;'>
+                                        </div>
+                                        <div class='totalDivCol' style="display: flex; align-items: center; margin-right: 0px; padding: 5px;">
+                                            <div class='input-group-prepend'>
+                                                <span class='input-group-text'>Ingresos Movimientos:</span>
+                                            </div>
+                                            <input type="text" class="form-control inputIngMov" placeholder="0" disabled style='width:100px;'>
+                                        </div>
+                                        <div class='totalDivCol' style="display: flex; align-items: center; margin-right: 0px; padding: 5px;">
+                                            <div class='input-group-prepend'>
+                                                <span class='input-group-text'>Egresos Movimientos:</span>
+                                            </div>
+                                            <input type="text" class="form-control inputEgrMov" placeholder="0" disabled>
                                         </div>
                                 </div>
                             </div>
@@ -138,7 +164,7 @@ include ("../../procesos/check/check.php");
                                             <button id="cajaDetalle" class="btn btn-secondary">VER ARQUEO DE CAJA</button>
                                         </div>
                                         <div class='totalDivCol' style="display: flex; align-items: center; margin-right: 0px; padding: 5px;">
-                                            <button id="cajaDetalle" class="btn btn-danger">CERRAR CAJA</button>
+                                            <button id="cajaCerrado" class="btn btn-danger">CERRAR CAJA</button>
                                         </div>
                                 </div>
                         </div>
@@ -177,7 +203,7 @@ include ("../../procesos/check/check.php");
 
 </div>
 
-<div id="backModal">
+    <div id="backModal">
             <div class="drower">
                 <div class="headerModal" >
                     <h1 class="text-secondary mt-2"><u>Caja</u></h1>
@@ -201,14 +227,14 @@ include ("../../procesos/check/check.php");
                 <hr style="color: gray">
                 <div class="footerModalDos">
                     <div class="d-flex justify-content-end">
-                        <button id="subirCaja" class="btn btn-success">Actuaizar</button>
+                        <button id="subirCaja" class="btn btn-success">Actualizar</button>
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
 
 
-<div id="arqueoCaja">
+    <div id="arqueoCaja">
             <div class="drowerArqueo">
                 <div class="headerModal" >
                     <div class="d-flex justify-content-between">
@@ -228,10 +254,12 @@ include ("../../procesos/check/check.php");
                                                 <th>Id</th>
                                                 <th>Fecha</th>
                                                 <th>Monto Inicial</th>
-                                                <th>Cierre</th>
+                                                <th>Caja Estado</th>
                                                 <th>Saldo</th>
-                                                <th>Ingreso</th>
-                                                <th>Egreso</th>
+                                                <th>Ingreso Ventas</th>
+                                                <th>Egreso Compras</th>
+                                                <th>Ingreso Movimientos</th>
+                                                <th>Egreso Movimientos</th>
                                                 <th>Hora Cierre</th>
                                                 <th>Empleado</th>
                                             </tr>
@@ -244,7 +272,27 @@ include ("../../procesos/check/check.php");
                     </div>
                 </div>  
             </div>
-        </div>
+    </div>
+
+    <div id="CajaCerrada">
+            <div class="drowerCaja">
+                <div class="headerModal" >
+                    <div class="d-flex justify-content-end">
+                        <button id="cerrarCajaX" class="btn btn-danger">X</button>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                <h3>¿Estas seguro de cerrar la caja actual?</h3>
+                </div>
+                <div class="headerModal">
+                    <div class="d-flex justify-content-end">
+                    <button id="cerrarCaja" class="btn btn-danger">NO</button>
+                    <button id="cajaSi" class="btn btn-success">SI</button>
+                    </div>
+                </div>
+
+            </div>
+    </div>
 </body>
 
     <!-- JavaScript Bundle with Popper -->

@@ -42,6 +42,12 @@ switch($opcion){
         $consulta = "UPDATE facturascompras SET is_check = 1 WHERE fcid = '$folio'";
         $resultado= mysqli_query($conn, $consulta);      
         break;
+
+    case 8: // select de historial de ventas
+        $consulta = "SELECT fcid, cjid, fcfechahora, provnom, fctotal FROM facturascompras INNER JOIN proveedores ON facturascompras.provid = proveedores.provid AND is_delete = 0 AND is_check = 1";
+        $resultado= mysqli_query($conn, $consulta);     
+        $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+        break;
 }
 
 print json_encode($data, JSON_UNESCAPED_UNICODE); //enviar el array final en formato json a JS

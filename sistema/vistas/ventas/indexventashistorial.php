@@ -29,15 +29,7 @@ include ("../../procesos/check/check.php");
 
 <div id="content">
     <div class="container-xl">
-        <h2>HISTORIAL DE VENTAS A CLIENTES</h2>
-        <BR>
-        <div class="input-group-prepend">
-            <span class="input-group-text">DESDE:</span>
-            <input type="date" id="desdeFechaValor" name="trip-start" value="" min="2018-01-01" max="2022-03-08">
-            <span class="input-group-text">HASTA:</span>
-            <input type="date" id="hastaFechaValor" name="trip-start" value="" min="2018-01-01" max="2022-03-08">
-            <button id="addGraficar" class="btn btn-success"><i class="fas fa-search"></i></button>
-        </div>
+        <h2>HISTORIAL HISTORICO DE VENTAS A CLIENTES</h2>
         <br>
         <BR>
         <div class="table-responsive">

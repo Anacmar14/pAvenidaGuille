@@ -29,7 +29,7 @@ include ("../../procesos/check/check.php");
 
 <div id="content">
     <div class="container-xl">
-        <h2>HISTORIAL DE COMPRAS A PROVEEDORES</h2>
+        <h2>HISTORIAL HISTORICO DE COMPRAS A PROVEEDORES</h2>
         <BR>
         <div class="table-responsive">
             <table id="tablaHistorialCompras"

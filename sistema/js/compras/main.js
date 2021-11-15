@@ -20,6 +20,7 @@ $(document).ready(function () {
   var fechadeldia = fechadeldia.toLocaleDateString("es-ES");
   var stock = 0;
   reloadTablaHistorial();
+  reloadTablaLista();
   $("#home-tab").prop('disabled', true);
   opcion = 4;
 
@@ -112,7 +113,7 @@ $(document).ready(function () {
     });
 
     function reloadTablaHistorial() {
-      opcion = 4;
+      opcion = 8;
       tablaHistorialCompras = $("#tablaHistorialCompras").DataTable({
         language: {
           "decimal": "",
@@ -178,7 +179,81 @@ $(document).ready(function () {
           { data: "provnom" },
           { data: "fctotal" },
           { defaultContent:
-              "<div class='dt-buttons btn-group style='flex-wrap: nowrap' '><button class='btn btn-primary btn-sm btnVerMasDetalleCompras' title='Ver Mas'><i class='material-icons'>remove_red_eye</i></button><div class='oc'><button class='btn btn-danger btn-sm btnOcultarCompra' title='Anular Compra'><i class='material-icons'>block</i></button></div><button class='btn btn-success btn-sm btnConfirmarCompra' title='Confirmar compra'><i class='material-icons'>check</i></button></div>",
+              "<div class='dt-buttons btn-group style='flex-wrap: nowrap' '><button class='btn btn-primary btn-sm btnVerMasDetalleCompras' title='Ver Mas'><i class='material-icons'>remove_red_eye</i></button><div class='oc'></div>",
+          },
+
+        ],
+      });
+    }
+
+    function reloadTablaLista() {
+      opcion = 4;
+      tablaHistorialCompras = $("#tablaComprasLista").DataTable({
+        language: {
+          "decimal": "",
+          "emptyTable": "No hay información",
+          "info": "Mostrando _START_ a _END_ de _TOTAL_ Ventas",
+          "infoEmpty": "Mostrando 0 to 0 of 0 Ventas",
+          "infoFiltered": "(Filtrado de _MAX_ total Venta)",
+          "infoPostFix": "",
+          "thousands": ",",
+          "lengthMenu": "Mostrar _MENU_ Ventas",
+          "loadingRecords": "Cargando...",
+          "processing": "Procesando...",
+          "search": "Buscar:",
+          "zeroRecords": "Sin resultados encontrados",
+          "paginate": {
+              "first": "Primero",
+              "last": "Ultimo",
+              "next": "Siguiente",
+              "previous": "Anterior"
+          }
+        },
+        responsive: "true",
+          dom: 'Bfrtilp',       
+          buttons:[ 
+          {
+            extend:    'excelHtml5',
+            text:      '<i class="fas fa-file-excel"></i> ',
+            titleAttr: 'Exportar a Excel',
+            className: 'btn btn-success',
+            exportOptions: {
+                columns: [ 0, 1, 2, 3]
+            },
+          },
+          {
+            extend:    'pdfHtml5',
+            text:      '<i class="fas fa-file-pdf"></i> ',
+            titleAttr: 'Exportar a PDF',
+            className: 'btn btn-danger',
+            exportOptions: {
+                columns: [ 0, 1, 2, 3]
+            },
+          },
+          {
+            extend:    'print',
+            text:      '<i class="fa fa-print"></i> ',
+            titleAttr: 'Imprimir',
+            className: 'btn btn-info',
+            exportOptions: {
+                columns: [ 0, 1, 2, 3]
+            },
+          },
+        ],
+        ajax: {
+          url: "../../procesos/compras/consCompras.php",
+          method: "POST", //usamos el metodo POST
+          data: { opcion: opcion }, //enviamos opcion 4 para que haga un SELECT
+          dataSrc: "",
+        },
+        columns: [
+          { data: "fcid" },
+          { data: "cjid"},
+          { data: "fcfechahora" },
+          { data: "provnom" },
+          { data: "fctotal" },
+          { defaultContent:
+              "<div class='dt-buttons btn-group style='flex-wrap: nowrap' '><button class='btn btn-secondary btn-sm btnEditarCompra' title='Editar Compra'><i class='material-icons'>edit</i></button><button class='btn btn-primary btn-sm btnVerMasDetalleCompras' title='Ver Mas'><i class='material-icons'>remove_red_eye</i></button><div class='oc'><button class='btn btn-danger btn-sm btnOcultarCompra' title='Anular Compra'><i class='material-icons'>block</i></button></div><button class='btn btn-success btn-sm btnConfirmarCompra' title='Confirmar compra'><i class='material-icons'>check</i></button></div>",
           },
 
         ],
@@ -208,7 +283,28 @@ $(document).ready(function () {
       }
     }); 
 
-
+    $.ajax({
+      url: "../../procesos/compras/consUsuario.php",
+      type: "POST",
+      datatype: "JSON",
+      data: {},
+      success: function (data) {
+        result = JSON.parse(data);
+        if (result == 1){
+          $('#tablaComprasLista').DataTable().destroy();
+          $('#tablaComprasLista').DataTable( {
+              "pagingType": "full_numbers",
+              "columnDefs": [
+                  {
+                      "targets": [ 1 ],
+                      "visible": false,
+                      "searchable": false
+                  },
+              ]
+          } );
+        }
+      }
+    }); 
 
     $(document).on("click", ".btnConfirmarCompra", function () {
       fila = $(this).closest("tr");
@@ -277,7 +373,9 @@ $(document).ready(function () {
         success: function (data) {
           console.log('aquitoy')
           $('#tablaHistorialCompras').DataTable().destroy();
+          $('#tablaComprasLista').DataTable().destroy();
           reloadTablaHistorial();
+          reloadTablaLista();
         }
       }) 
     })

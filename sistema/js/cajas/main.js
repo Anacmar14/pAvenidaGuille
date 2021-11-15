@@ -1,8 +1,8 @@
 $(document).ready(function () {
   var saldoTotal = 0;
-  var fechadeldia = new Date();
-  var fechadeldia = fechadeldia.toLocaleDateString("es-ES");
   var currentdate = new Date(); 
+
+
   var datetime = currentdate.getDate() + "/"
               + (currentdate.getMonth()+1)  + "/" 
               + currentdate.getFullYear() + " -- "  
@@ -16,49 +16,62 @@ $(document).ready(function () {
     cjmontoincial: 0,
     cjsaldo: 0,
   }
-
-  $("#inputCierre").prop("readonly", true);
   $('#fechaHora').val(datetime);
   $('#fechaHora').prop("readonly", true);
-  $('#nombreCajero').val("Mati");
+  nombreCajero()
+  function nombreCajero() {
+    opcion = 7;
+    $.ajax({
+      url:"../../procesos/cajas/consCaja.php",
+      type:"POST",
+      datatype:"JSON",
+      data: {
+        opcion: opcion,
+        datetime: datetime
+      },
+      success: function (data) {
+      result = JSON.parse(data);
+      cajeroNombre = result;
+      $('#nombreCajero').val(cajeroNombre)
+    }
+  })
+  }
   $('#nombreCajero').prop("readonly", true);
-
   reloadApertura();
 
+  function reloadApertura(){
+    opcion = 1;
+    $.ajax({
+      url:"../../procesos/cajas/consCaja.php",
+      type:"POST",
+      datatype:"JSON",
+      data: {
+        opcion: opcion,
+      },
+      success: function (data) {
+        result = JSON.parse(data);
+        caja.cjid = result[0].cjid;
+        caja.cjcierre = result[0].cjcierre;
+        caja.cjmontoincial = result[0].cjmontoincial;
+        caja.cjsaldo = result[0].cjsaldo;
+        if(caja.cjmontoincial == 0){
+          $("#backModal").css('display', 'flex');
+        }
+        tablaMovimientos();
+        $('.inputMontoInicial').val(caja.cjmontoincial)
+        $('.inputCajero').val($('#nombreCajero').val())
+        $('.inputFecha').val($('#fechaHora').val())
+      }
+  })
 
-function reloadApertura(){
-  opcion = 1;
-  $.ajax({
-    url:"../../procesos/cajas/consCaja.php",
-    type:"POST",
-    datatype:"JSON",
-    data: {
-      opcion: opcion,
-    },
-    success: function (data) {
-    result = JSON.parse(data);
-    caja.cjid = result[0].cjid;
-    caja.cjcierre = result[0].cjcierre;
-    caja.cjmontoincial = result[0].cjmontoincial ;
-    caja.cjsaldo = result[0].cjsaldo;
-    $('.inputSaldo').val(caja.cjsaldo);
-    $('.inputMontoInicial').val(caja.cjmontoincial)
-    if(caja.cjmontoincial == 0){
-      $("#backModal").css('display', 'flex');
-    }
-    tablaMovimientos();
   }
-})
 
-}
+  $(document).on("click", "#cajaCerrado", function () {
+      $("#CajaCerrada").css('display', 'flex');
+  })
  
   $(document).on("click", "#subirCaja", function () {
     opcion = 2;
-    if ( caja.cjsaldo > 0){
-      caja.cjcierre = 1;
-      alert("usted esta cerrando la caja");
-    }
-
     $.ajax({
       url:"../../procesos/cajas/consCaja.php",
       type:"POST",
@@ -68,7 +81,7 @@ function reloadApertura(){
         cjid: caja.cjid,
         cjcierre: caja.cjcierre,
         cjmontoincial: caja.cjmontoincial,
-        cjsaldo: caja.cjsaldo,
+        cjsaldo: caja.cjsaldo
       },
       success: function (data) {
       location.reload();
@@ -79,10 +92,6 @@ function reloadApertura(){
   $(document).on("keyup", "#inputApertura", function () { 
     caja.cjmontoincial =  $('#inputApertura').val();
   });
-  
-  $(document).on("keyup", "#inputCierre", function () { 
-    caja.cjsaldo =  $('#inputCierre').val();
-  });
 
   $(document).on("click", "#cajaDetalle", function () {
     $('#tablaCaja').DataTable().destroy();
@@ -92,12 +101,12 @@ function reloadApertura(){
       language: {
         "decimal": "",
         "emptyTable": "No hay información",
-        "info": "Mostrando _START_ a _END_ de _TOTAL_ Productos",
-        "infoEmpty": "Mostrando 0 to 0 of 0 Productos",
-        "infoFiltered": "(Filtrado de _MAX_ total Productos)",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Cajas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Cajas",
+        "infoFiltered": "(Filtrado de _MAX_ total Cajas)",
         "infoPostFix": "",
         "thousands": ",",
-        "lengthMenu": "Mostrar _MENU_ Productos",
+        "lengthMenu": "Mostrar _MENU_ Cajas",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
         "search": "Buscar:",
@@ -119,12 +128,14 @@ function reloadApertura(){
         { data: "cjid" },
         { data: "cjfecha" },
         { data: "cjmontoincial" },
-        { data: "cjcierre" },
+        { data: "tipocajadesc" },
         { data: "cjsaldo" },
         { data: "cjtoting" },
         { data: "cjtotegr" },
+        { data: "cjtotalingmov" },
+        { data: "cjtotalegrmov" },
         { data: "cjfechahoracierre" },
-        { data: "empid" },    
+        { data: "empnom" },    
       ],
     });
     $("#arqueoCaja").css('display', 'flex');
@@ -173,38 +184,63 @@ function reloadApertura(){
       }
       ],
     });
-    $.ajax({
+    // $.ajax({
+    //   url:"../../procesos/cajas/consCaja.php",
+    //   type:"POST",
+    //   datatype:"JSON",
+    //   data: {
+    //     opcion: opcion,
+    //     cjid: caja.cjid
+    //   },
+    //   success: function (data) {
+    //     result = JSON.parse(data);
+    //     totalIngreso = 0;
+    //     totalEgreso = 0;
+    //     saldoParcial = 0;
+    //     saldoTotal = 0;
+    //       for (let i = 0; i < result.length; i++) {
+    //         if(result[i].movtipo == 1){
+    //           totalIngreso = Number(totalIngreso) + Number(result[i].movdinero);
+    //         }else{
+    //           totalEgreso = Number(result[i].movdinero) + Number(totalEgreso);
+    //         }
+    //       }
+    //     saldoParcial = totalIngreso - totalEgreso;
+
+    //     if(saldoParcial<0){
+    //       saldoTotal = + caja.cjmontoincial + saldoParcial
+    //     }
+    //     if(saldoParcial >= 0){
+    //       saldoTotal = + caja.cjmontoincial + saldoParcial
+    //     }
+    //     tipo =  $('.inputSaldo').val(saldoTotal);
+    // }
+    // })
+
+  opcion= 8;
+  $.ajax({
       url:"../../procesos/cajas/consCaja.php",
       type:"POST",
       datatype:"JSON",
       data: {
         opcion: opcion,
+        cjid: caja.cjid
       },
       success: function (data) {
         result = JSON.parse(data);
-        totalIngreso = 0;
-        totalEgreso = 0;
-        saldoParcial = 0;
-        saldoTotal = 0;
-          for (let i = 0; i < result.length; i++) {
-            if(result[i].movtipo == 1){
-              totalIngreso = + result[i].movdinero + totalIngreso;
-            }else{
-              totalEgreso = + result[i].movdinero + totalEgreso;
-            }
-          }
-        saldoParcial = totalIngreso - totalEgreso;
-
-        if(saldoParcial<0){
-          saldoTotal = + caja.cjmontoincial + saldoParcial
-        }
-        if(saldoParcial >= 0){
-          saldoTotal = + caja.cjmontoincial + saldoParcial
-        }
-        tipo =  $('.inputSaldo').val(saldoTotal);
-        
+        let egresos = result[0].egresos
+        let ingresos = result[1].ingresos
+        let movimientosingresos = result[2].movimientosingresos
+        let movimientosegresos = result[3].movimientosegresos
+        $('.inputIngVen').val(ingresos);
+        $('.inputEgrComp').val(egresos);
+        $('.inputIngMov').val(movimientosingresos);
+        $('.inputEgrMov').val(movimientosegresos);
+        let saldoTotal = Number(caja.cjmontoincial) + Number(ingresos) + Number(movimientosingresos) - Number(egresos) - Number(movimientosegresos)
+        $('.inputSaldo').val(saldoTotal);
     }
   })
+
   }
 
   $(document).on("click", ".btnEliminarMovimiento", function () {
@@ -228,37 +264,83 @@ function reloadApertura(){
 
   $(document).on("click", "#cerrarArqueo", function () {
     $("#arqueoCaja").css('display', 'none');
-    })
+  })
 
+  $(document).on("click", "#cerrarCaja", function () {
+    $("#CajaCerrada").css('display', 'none');
+  })
 
-    $(document).on("click", "#addMovimiento", function () {
-      tipo = $("#tipoMovimiento:checked").val();
-      dinero =  $('#dineroMovimiento').val();
-      descripcion =  $('#descripcionMovimiento').val();
-      opcion = 5;
-      if ( caja.cjsaldo > 0){
-        caja.cjcierre = 1;
-        alert("usted esta cerrando la caja");
-      }
-  
-      $.ajax({
+  $(document).on("click", "#cerrarCajaX", function () {
+    $("#CajaCerrada").css('display', 'none');
+  })
+
+  $(document).on("click", "#addMovimiento", function () {
+    tipo = $("#tipoMovimiento:checked").val();
+    dinero =  $('#dineroMovimiento').val();
+    descripcion =  $('#descripcionMovimiento').val();
+    opcion = 5;
+    $.ajax({
+      url:"../../procesos/cajas/consCaja.php",
+      type:"POST",
+      datatype:"JSON",
+      data: {
+        opcion: opcion,
+        tipo: tipo,
+        dinero:dinero,
+        descripcion:descripcion,
+        cjid: caja.cjid
+      },
+      success: function (data) {
+      $('#tablaMovimientos').DataTable().destroy();
+      tablaMovimientos();
+      $("#tipoMovimiento").prop('checked', false);
+      $("#descripcionMovimiento").val('');
+      $("#dineroMovimiento").val('');
+    }
+  })
+  });
+
+  $(document).on("click", "#cajaSi", function () {
+    // console.log($('.inputSaldo').val())
+    opcion= 8;
+    $.ajax({
         url:"../../procesos/cajas/consCaja.php",
         type:"POST",
         datatype:"JSON",
         data: {
           opcion: opcion,
-          tipo: tipo,
-          dinero:dinero,
-          descripcion:descripcion,
           cjid: caja.cjid
         },
         success: function (data) {
-        $('#tablaMovimientos').DataTable().destroy();
-        tablaMovimientos();
-        $("#tipoMovimiento").prop('checked', false);
-        $("#descripcionMovimiento").val('');
-        $("#dineroMovimiento").val('');
+          result = JSON.parse(data);
+          let egresos = result[0].egresos
+          let ingresos = result[1].ingresos
+          let movimientosingresos = result[2].movimientosingresos
+          let movimientosegresos = result[3].movimientosegresos
+          let empid = result[4].empid;
+          let saldo = Number(caja.cjmontoincial) + Number(ingresos) + Number(movimientosingresos) - Number(egresos) - Number(movimientosegresos)
+          opcion= 9;
+          $.ajax({
+            url:"../../procesos/cajas/consCaja.php",
+            type:"POST",
+            datatype:"JSON",
+            data: {
+              opcion: opcion,
+              cjid: caja.cjid,
+              saldo: saldo,
+              ingresos: ingresos,
+              movimientosingresos: movimientosingresos,
+              egresos: egresos,
+              movimientosegresos: movimientosegresos,
+              empid: empid
+            },
+            success: function (data) {   
+              location.reload();
+          }
+        })
+          
       }
     })
-    });
+
+  })
 })

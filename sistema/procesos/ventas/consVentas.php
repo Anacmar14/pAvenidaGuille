@@ -43,6 +43,12 @@ switch($opcion){
         $consulta = "UPDATE facturasventas SET is_check = 1 WHERE fvid = '$folio'";
         $resultado= mysqli_query($conn, $consulta);      
         break;
+
+    case 8: // select de historial de ventas historico
+        $consulta = "SELECT fvid, cjid, fvfechahora, clnom, fvtotal FROM facturasventas INNER JOIN clientes ON facturasventas.clid = clientes.clid AND is_delete = 0 AND is_check = 1";
+        $resultado= mysqli_query($conn, $consulta);     
+        $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+        break;
 }
 
 print json_encode($data, JSON_UNESCAPED_UNICODE); //enviar el array final en formato json a JS

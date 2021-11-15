@@ -76,12 +76,15 @@
           <a href="../../../sistema/vistas/compras/indexcomprascarrito.php"><i class="fas fa-shopping-cart"></i>Pedido a Proveedor</a>
         </li>
         <li class="od">
-          <a href="../../../sistema/vistas/compras/indexcomprashistorial.php"><i class="fas fa-clipboard-list"></i>Lista de Compras</a>
+          <a href="../../../sistema/vistas/compras/indexcompraslista.php"><i class="fas fa-clipboard-list"></i>Lista de Compras</a>
         </li>
         <li class="od">
+          <a href="../../../sistema/vistas/compras/indexcomprashistorial.php"><i class="fas fa-clipboard-list"></i>Historal de Compras</a>
+        </li>
+        <li class="od oc">
           <a href="../../../sistema/vistas/movimientos/indexmovimientos.php"><i class="fas fa-sync"></i>Movimientos</a>
         </li>
-        <li class="oc">
+        <li class="od">
           <a href="../../../sistema/vistas/cajas/indexcajas.php"><i class="fas fa-box"></i>Caja</a>
         </li>
       </ul>
