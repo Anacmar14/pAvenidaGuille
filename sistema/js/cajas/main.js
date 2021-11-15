@@ -15,6 +15,30 @@ $(document).ready(function () {
       }
         if (entrar == 0) {
           $(".container").css('display', 'block');
+        }
+        else if (entrar == 1){
+          $(".container").css('display', 'none');
+          $(".mensajeCajaCerrada").css('display', 'flex');
+          $("#opcionAdministrador").css('display', 'flex');
+
+          $(document).on("click", "#abrirCaja", function () {
+            opcion = -1;
+            $.ajax({
+              url:"../../procesos/cajas/consCaja.php",
+              type:"POST",
+              datatype:"JSON",
+              data: {
+                opcion: opcion,
+              },
+              success: function (data) {
+              location.reload();
+            }
+          })
+          });
+
+        }
+      }
+  })
           var saldoTotal = 0;
           var currentdate = new Date(); 
       
@@ -360,11 +384,5 @@ $(document).ready(function () {
       
           })
       
-        }
-        else if (entrar == 1){
-          $(".container").css('display', 'none');
-          $(".mensajeCajaCerrada").css('display', 'flex');
-        }
-      }
-  })
+
 })

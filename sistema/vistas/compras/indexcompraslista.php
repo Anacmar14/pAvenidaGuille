@@ -28,7 +28,7 @@ include ("../../procesos/check/check.php");
 <body>
 
 <div id="content">
-    <div class="container-xl">
+    <div class=" container container-xl">
         <h2>LISTA DE COMPRAS A PROVEEDORES</h2>
         <BR>
         <div class="table-responsive">
@@ -46,6 +46,13 @@ include ("../../procesos/check/check.php");
                 </thead>
                 <tbody class="table-light"></tbody>
             </table>
+        </div>
+    </div>
+    <div class="mensajeCajaCerrada">
+        <div class="card card-body">
+                <div class="form-group">
+                    <h6>LA CAJA DE HOY SE ENCUENTRA CERRADA</h6>
+                </div>
         </div>
     </div>
 </div>

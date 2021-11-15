@@ -5,7 +5,6 @@ include_once '../../bd/db2.php';
 $folio = (isset($_POST['folio'])) ? $_POST['folio'] : '';
 $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
 
-
 switch($opcion){
     case 1: // cambia la anulacion de venta
         $consulta = "UPDATE facturasventas SET is_delete = 1 WHERE fvid = '$folio'";

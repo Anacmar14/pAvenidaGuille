@@ -28,6 +28,12 @@ $movegresos = (isset($_POST['movimientosegresos'])) ? $_POST['movimientosegresos
 $empid = (isset($_POST['empid'])) ? $_POST['empid'] : '';
 
 switch($opcion){//Consulta por estado de caja
+    case -1;
+        $date = date("Y-m-d");
+        $consulta = "UPDATE cajas SET cjcierre= 0 WHERE cjfecha = '$date'";
+        $resultado = $conexion->prepare($consulta);
+        $resultado->execute();
+        break;
     case 0;
         $date = date("Y-m-d");
         $consulta = "SELECT cjcierre FROM cajas WHERE cjfecha = '$date'";
@@ -136,6 +142,13 @@ switch($opcion){//Consulta por estado de caja
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         break;  
+
+    case 10: 
+        $consulta = "SELECT MAX(cjid) as cajahoy FROM cajas";
+        $resultado = $conexion->prepare($consulta);
+        $resultado->execute();        
+        $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+        break;
 }
 
 

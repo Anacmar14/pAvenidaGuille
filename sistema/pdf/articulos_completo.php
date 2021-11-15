@@ -117,7 +117,7 @@
                     header('Content-Disposition: attachment;filename=articulos_completo.xls');
                     header('Pragma: no-cache');
                     header('Expires: 0');
-                    $sql = "SELECT proid, procodigo, pronombre, canom, prostockactual, proprecio FROM productos INNER JOIN marcas ON 
+                    $sql = "SELECT proid, procodigo, pronombre, canom, prostockactual, proprecio FROM productos INNER JOIN categorias ON 
                     productos.caid = categorias.caid";
                     $queryArticulos = $conn->query($sql);
                     if ($queryArticulos->num_rows > 0)

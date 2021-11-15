@@ -11,6 +11,7 @@ $compracantidad = (isset($_POST['cantidad'])) ? $_POST['cantidad'] : '';
 $compraorden = (isset($_POST['orden'])) ? $_POST['orden'] : '';
 $factura = (isset($_POST['factura'])) ? $_POST['factura'] : '';
 $total = (isset($_POST['total'])) ? $_POST['total'] : '';
+$caja = (isset($_POST['cjid'])) ? $_POST['cjid'] : '';
 
 $stockcantidadnueva = (isset($_POST['resultado'])) ? $_POST['resultado'] : '';
 
@@ -26,7 +27,6 @@ switch($opcion){
     case 5: //agregarcompracabeza
         $fecha = new DateTime();
         $fecha = $fecha->format('Y-m-d H:i:sP');
-        $caja = 1;
         $consulta = "INSERT INTO facturascompras (provid, cjid, fcfechahora, fctotal) VALUES ('$proveedor','$caja','$fecha',0)";
         $resultado= mysqli_query($conn, $consulta);     
 

@@ -1,4 +1,29 @@
 $(document).ready(function () {
+
+  var entrar=0;
+  opcion = 0;
+  $.ajax({
+      url:"../../procesos/cajas/consCaja.php",
+      type:"POST",
+      datatype:"JSON",
+      data: {
+        opcion: opcion,
+      },
+      success: function (data) {
+      result = JSON.parse(data);
+      if (result.length != 0) {
+          entrar = result[0].cjcierre;
+      }
+        if (entrar == 0) {
+          $(".container").css('display', 'block');
+        }
+        else if (entrar == 1){  
+          $(".container").css('display', 'none');
+          $(".mensajeCajaCerrada").css('display', 'flex');
+        }  
+        }
+      })
+      
   var total = 0;
   var id, opcion;
   var arrayObjeto = [];
@@ -536,62 +561,76 @@ $(document).ready(function () {
     if(banderitaproveedor){  
       proveedorId=0;
     }
-    var opcion = 5;
+    
+    opcion = 10;
     $.ajax({
-      url:"../../procesos/compras/consProd.php",
-      type:"POST",
-      datatype:"JSON",
-      data: {
-        proveedor:proveedorId,
-        opcion:opcion
+      url: "../../procesos/cajas/consCaja.php",
+      type: "POST",
+      datatype: "JSON",
+      data: { opcion: opcion,
       },
       success: function (data) {
-        //CREACION DE DETALLE DE COMPRA
         result = JSON.parse(data);
-        factura = result[0].factura;
-        let orden = 1;
-        for (let i = 0; i < arrayObjeto.length; i++) {
+        cjid = result[0].cajahoy;
 
-          let id = arrayObjeto[i].id;
-          let precio = arrayObjeto[i].precio;
-          let cantidad = arrayObjeto[i].cantidad;
-          // actualizarStock(id,cantidad);
-          opcion = 6;
-            $.ajax({
-              url: "../../procesos/compras/consProd.php",
-              type: "POST",
-              datatype: "JSON",
-              data: {
-                opcion:opcion,
-                id:id,
-                precio:precio,
-                cantidad:cantidad,
-                orden:orden,
-                factura:factura,
-              },
-              success: function (data) {
-                //ACTUALIZACION DE LA CABEZA DE LA COMPRA
-                opcion = 7;
-                $.ajax({
-                  url: "../../procesos/compras/consProd.php",
-                  type: "POST",
-                  datatype: "JSON",
-                  data: {
-                    opcion:opcion,
-                    factura:factura,
-                    total: totalPorProducto
-                  },
-                  success: function (data) {
-                    // location.reload();
-                  }
-                })
-              },
-            });
-            orden++;
+      var opcion = 5;
+      $.ajax({
+        url:"../../procesos/compras/consProd.php",
+        type:"POST",
+        datatype:"JSON",
+        data: {
+          proveedor:proveedorId,
+          opcion:opcion,
+          cjid:cjid
+        },
+        success: function (data) {
+          //CREACION DE DETALLE DE COMPRA
+          result = JSON.parse(data);
+          factura = result[0].factura;
+          let orden = 1;
+          for (let i = 0; i < arrayObjeto.length; i++) {
+
+            let id = arrayObjeto[i].id;
+            let precio = arrayObjeto[i].precio;
+            let cantidad = arrayObjeto[i].cantidad;
+            // actualizarStock(id,cantidad);
+            opcion = 6;
+              $.ajax({
+                url: "../../procesos/compras/consProd.php",
+                type: "POST",
+                datatype: "JSON",
+                data: {
+                  opcion:opcion,
+                  id:id,
+                  precio:precio,
+                  cantidad:cantidad,
+                  orden:orden,
+                  factura:factura,
+                },
+                success: function (data) {
+                  //ACTUALIZACION DE LA CABEZA DE LA COMPRA
+                  opcion = 7;
+                  $.ajax({
+                    url: "../../procesos/compras/consProd.php",
+                    type: "POST",
+                    datatype: "JSON",
+                    data: {
+                      opcion:opcion,
+                      factura:factura,
+                      total: totalPorProducto
+                    },
+                    success: function (data) {
+                      // location.reload();
+                    }
+                  })
+                },
+              });
+              orden++;
+          }
         }
+      });
       }
     });
-
   });
 
   //IMPRIMIR
@@ -761,4 +800,5 @@ $(document).ready(function () {
           }
         }); 
     }
+
 });

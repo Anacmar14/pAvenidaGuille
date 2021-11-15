@@ -28,7 +28,7 @@ include ("../../procesos/check/check.php");
 <body>
 
 <div id="content">
-    <div class="container-xl">
+    <div class="container container-xl">
         <div>
             <div class="d-flex bd-highlight" style="margin-top: 100px">
             
@@ -137,6 +137,13 @@ include ("../../procesos/check/check.php");
                 </div>
             </div>
         
+        </div>
+    </div>
+    <div class="mensajeCajaCerrada">
+        <div class="card card-body">
+                <div class="form-group">
+                    <h6>LA CAJA DE HOY SE ENCUENTRA CERRADA</h6>
+                </div>
         </div>
     </div>
 </div>

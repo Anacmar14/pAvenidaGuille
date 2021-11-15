@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  
   var entrar=0;
   opcion = 0;
   $.ajax({
@@ -14,8 +15,14 @@ $(document).ready(function () {
           entrar = result[0].cjcierre;
       }
         if (entrar == 0) {
-  $(".container").css('display', 'block');
-
+          $(".container").css('display', 'block');
+        }
+        else if (entrar == 1){  
+          $(".container").css('display', 'none');
+          $(".mensajeCajaCerrada").css('display', 'flex');
+        }  
+        }
+      })
   var total = 0;
   var id, opcion;
   var arrayObjeto = [];
@@ -320,57 +327,57 @@ $(document).ready(function () {
     }); 
 
 
-    $(document).on("click", ".btnConfirmarVenta", function () {
+  $(document).on("click", ".btnConfirmarVenta", function () {
       fila = $(this).closest("tr");
       id = parseInt(fila.find("td:eq(0)").text());
       folio = id;
       opcion = 5;
-      $.ajax({
-        url: "../../procesos/ventas/consVentas.php",
-        type: "POST",
-        datatype: "JSON",
-        data: { opcion: opcion,
-          folio: folio
-        },
-        success: function (data) {
-          result = JSON.parse(data);
-          info = result[0].chequeo;
-          if (info == 1){
-            alert('Ya se resto al stock el folio numero '+folio+ ' anteriormente');
-          }
-          else{
-            opcion = 6;
-            $.ajax({
-              url: "../../procesos/ventas/consVentas.php",
-              type: "POST",
-              datatype: "JSON",
-              data: { opcion: opcion,
-                folio: folio
-              },
-              success: function (data) {
-                result = JSON.parse(data);
-                  for (let i = 0; i < result.length; i++) {
+        $.ajax({
+          url: "../../procesos/ventas/consVentas.php",
+          type: "POST",
+          datatype: "JSON",
+          data: { opcion: opcion,
+            folio: folio,
+          },
+          success: function (data) {
+            result = JSON.parse(data);
+            info = result[0].chequeo;
+            if (info == 1){
+              alert('Ya se resto al stock el folio numero '+folio+ ' anteriormente');
+            }
+            else{
+              opcion = 6;
+              $.ajax({
+                url: "../../procesos/ventas/consVentas.php",
+                type: "POST",
+                datatype: "JSON",
+                data: { opcion: opcion,
+                  folio: folio
+                },
+                success: function (data) {
+                  result = JSON.parse(data);
+                    for (let i = 0; i < result.length; i++) {
 
-                    let id = result[i].proid;
-                    let cantidad = result[i].dvcantidad;
-                    actualizarStock(id,cantidad);
-                  }
-                  alert('Stock actualizado satisfactoriamente')
-                  opcion = 7;
-                  $.ajax({
-                    url: "../../procesos/ventas/consVentas.php",
-                    type: "POST",
-                    datatype: "JSON",
-                    data: { opcion: opcion,
-                      folio: folio
-                    },
-                  }) 
-              }
-            }) 
+                      let id = result[i].proid;
+                      let cantidad = result[i].dvcantidad;
+                      actualizarStock(id,cantidad);
+                    }
+                    alert('Stock actualizado satisfactoriamente')
+                    opcion = 7;
+                    $.ajax({
+                      url: "../../procesos/ventas/consVentas.php",
+                      type: "POST",
+                      datatype: "JSON",
+                      data: { opcion: opcion,
+                        folio: folio
+                      },
+                    }) 
+                }
+              }) 
+            }
           }
-        }
-      }) 
-    })
+        })
+  })
 
     $(document).on("click", ".btnOcultarVenta", function () {
       fila = $(this).closest("tr");
@@ -541,64 +548,78 @@ $(document).ready(function () {
     if(banderitacliente){  
       clienteId=0;
     }
-    var opcion = 5;
+
+    opcion = 10;
     $.ajax({
-      url:"../../procesos/ventas/consProd.php",
-      type:"POST",
-      datatype:"JSON",
-      data: {
-        cliente:clienteId,
-        opcion:opcion
+      url: "../../procesos/cajas/consCaja.php",
+      type: "POST",
+      datatype: "JSON",
+      data: { opcion: opcion,
       },
       success: function (data) {
-        //CREACION DE DETALLE DE VENTA
         result = JSON.parse(data);
-        factura = result[0].factura;
-        let orden = 1;
-        for (let i = 0; i < arrayObjeto.length; i++) {
+        cjid = result[0].cajahoy;
 
-          let id = arrayObjeto[i].id;
-          let precio = arrayObjeto[i].precio;
-          let cantidad = arrayObjeto[i].cantidad;
-          //actualizarStock(id,cantidad);
-          opcion = 6;
-            $.ajax({
-              url: "../../procesos/ventas/consProd.php",
-              type: "POST",
-              datatype: "JSON",
-              data: {
-                opcion:opcion,
-                id:id,
-                precio:precio,
-                cantidad:cantidad,
-                orden:orden,
-                factura:factura,
-              },
-              success: function (data) {
-                //ACTUALIZACION DE LA CABEZA DE LA VENTA
-                opcion = 7;
-                $.ajax({
-                  url: "../../procesos/ventas/consProd.php",
-                  type: "POST",
-                  datatype: "JSON",
-                  data: {
-                    opcion:opcion,
-                    factura:factura,
-                    valordescuento:valordescuento,
-                    subtotal:subtotal,
-                    total: totalPorProducto
-                  },
-                  success: function (data) {
-                    // location.reload();
-                  }
-                })
-              },
-            });
-            orden++;
+      var opcion = 5;
+      $.ajax({
+        url:"../../procesos/ventas/consProd.php",
+        type:"POST",
+        datatype:"JSON",
+        data: {
+          cliente:clienteId,
+          opcion:opcion,
+          cjid:cjid
+        },
+        success: function (data) {
+          //CREACION DE DETALLE DE VENTA
+          result = JSON.parse(data);
+          factura = result[0].factura;
+          let orden = 1;
+          for (let i = 0; i < arrayObjeto.length; i++) {
+
+            let id = arrayObjeto[i].id;
+            let precio = arrayObjeto[i].precio;
+            let cantidad = arrayObjeto[i].cantidad;
+            //actualizarStock(id,cantidad);
+            opcion = 6;
+              $.ajax({
+                url: "../../procesos/ventas/consProd.php",
+                type: "POST",
+                datatype: "JSON",
+                data: {
+                  opcion:opcion,
+                  id:id,
+                  precio:precio,
+                  cantidad:cantidad,
+                  orden:orden,
+                  factura:factura,
+                },
+                success: function (data) {
+                  //ACTUALIZACION DE LA CABEZA DE LA VENTA
+                  opcion = 7;
+                  $.ajax({
+                    url: "../../procesos/ventas/consProd.php",
+                    type: "POST",
+                    datatype: "JSON",
+                    data: {
+                      opcion:opcion,
+                      factura:factura,
+                      valordescuento:valordescuento,
+                      subtotal:subtotal,
+                      total: totalPorProducto
+                    },
+                    success: function (data) {
+                      // location.reload();
+                    }
+                  })
+                },
+              });
+              orden++;
+          }
         }
+      });
       }
     });
-
   });
 
   //IMPRIMIR
@@ -784,15 +805,4 @@ $(document).ready(function () {
       console.log(objeto);
       window.location.href = '../../graficas/ventas/index.php?fechas='+objeto+'';
     });
-
-
-  
-  
-        }
-        else if (entrar == 1){
-          $(".container").css('display', 'none');
-          $(".mensajeCajaCerrada").css('display', 'flex');
-        }  
-      }
-  })
 });

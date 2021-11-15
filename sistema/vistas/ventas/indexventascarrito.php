@@ -151,7 +151,7 @@ include ("../../procesos/check/check.php");
         </div>
     </div>
     <div class="mensajeCajaCerrada">
-        <div class="card card-body oc">
+        <div class="card card-body">
                 <div class="form-group">
                     <h6>LA CAJA DE HOY SE ENCUENTRA CERRADA</h6>
                 </div>

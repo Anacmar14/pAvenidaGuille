@@ -13,6 +13,7 @@ $factura = (isset($_POST['factura'])) ? $_POST['factura'] : '';
 $descuento = (isset($_POST['valordescuento'])) ? $_POST['valordescuento'] : '';
 $subtotal = (isset($_POST['subtotal'])) ? $_POST['subtotal'] : '';
 $total = (isset($_POST['total'])) ? $_POST['total'] : '';
+$caja = (isset($_POST['cjid'])) ? $_POST['cjid'] : '';
 
 $stockcantidadnueva = (isset($_POST['resultado'])) ? $_POST['resultado'] : '';
 
@@ -29,7 +30,6 @@ $stockcantidadnueva = (isset($_POST['resultado'])) ? $_POST['resultado'] : '';
             case 5: //agregarventacabeza
                 $fecha = new DateTime();
                 $fecha = $fecha->format('Y-m-d H:i:sP');
-                $caja = 1;
                 $consulta = "INSERT INTO facturasventas (clid, cjid, fvfechahora, fvdescuento, fvsubtotal, fvtotal) VALUES ('$cliente','$caja','$fecha',0,0,0)";
                 $resultado= mysqli_query($conn, $consulta);     
 

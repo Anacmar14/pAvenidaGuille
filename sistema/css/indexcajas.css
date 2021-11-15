@@ -2,7 +2,7 @@ a {
     text-decoration: none;
 }
 
-.container, .mensajeCajaCerrada {
+.container, .mensajeCajaCerrada, #opcionAdministrador {
     display: none;
 }
 

@@ -1,7 +1,9 @@
 a {
     text-decoration: none;
 }
-
+.container, .mensajeCajaCerrada, opcionAdministrador{
+    display: none;
+}
 .descuento, .totalt, .proveedorDiv{
     display: flex;
     align-items: center;

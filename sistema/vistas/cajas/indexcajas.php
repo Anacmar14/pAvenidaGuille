@@ -201,10 +201,22 @@ include ("../../procesos/check/check.php");
         </div>
     </div> 
     <div class="mensajeCajaCerrada">
-        <div class="card card-body oc">
+        <div class="card card-body">
                 <div class="form-group">
                     <h6>LA CAJA DE HOY SE ENCUENTRA CERRADA</h6>
                 </div>
+        </div>
+    </div>
+    <div class="oc od">
+        <div id="opcionAdministrador">
+            <div class="card card-body">
+                    <div class="form-group">
+                        <h6>OPCIONES DE ADMINISTRADOR</h6>
+                    </div>
+                    <div class='totalDivCol' style="display: flex; align-items: center; margin-right: 0px; padding: 5px;">
+                        <button id="abrirCaja" class="btn btn-success">ABRIR CAJA</button>
+                    </div>
+            </div>
         </div>
     </div>
 </div>

@@ -31,7 +31,7 @@ include ("../../procesos/check/check.php");
                 <i class="far fa-file-excel"> <strong style="font-family: Arial, Helvetica, sans-serif;">Excel</strong></i>
             </a>
             </div>
-        <div class="col-md-4 ov">
+        <!-- <div class="col-md-4 ov">
 
             <?php if(isset($_SESSION['message'])) { ?>
                 <div class="alert alert-<?= $_SESSION['message_type'] ?> alert-dismissible fade show" role="alert">
@@ -39,14 +39,14 @@ include ("../../procesos/check/check.php");
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
-                </div>
+                </div> -->
             <?php } ?>
 
             <?php
                 include ("../../../sistema/sesion/alerta.php");
             ?>
 
-            <div class="card card-body">
+            <!-- <div class="card card-body">
                 <form action="../../../sistema/procesos/save/savemovimientos.php" method="POST">
                     <div class="form-group">
                             <h6>AGREGAR NUEVO MOVIMIENTO</h6>
@@ -73,7 +73,7 @@ include ("../../procesos/check/check.php");
                     <input type="submit" name="save_task" class="btn btn-success btn-block" value="Enviar">
                 </form>
             </div>
-        </div>
+        </div> -->
 
         <div class="col-md-8">
             <table class="table table-striped" style="text-align: center">
@@ -85,7 +85,7 @@ include ("../../procesos/check/check.php");
                     <th>Descripcion</th>
                     <th>Caja</th>
                     <th>Empleado</th>
-                    <th class="ov">Acciones</th>
+                    <!-- <th class="ov">Acciones</th> -->
                     </tr>
                 </thead>
                 <tbody class="table-light">
@@ -101,14 +101,14 @@ include ("../../procesos/check/check.php");
                     <td><?php echo $row['movdesc'] ?></td>
                     <td><?php echo $row['cjid'] ?></td>
                     <td><?php echo $row['empnom'] ?></td>
-                    <td class="ov">
+                    <!-- <td class="ov">
                         <a href="../../../sistema/procesos/edit/editmovimientos.php?id=<?php echo $row['movid'] ?>" class="btn btn-secondary">
                             <i class="fas fa-marker"></i>
                         </a>
                         <a href="../../../sistema/procesos/delete/deletemovimientos.php?id=<?php echo $row['movid'] ?>" class="btn btn-danger oc">
                             <i class="far fa-trash-alt"></i>
                         </a>
-                    </td>
+                    </td> -->
                     </tr>
                     
 
