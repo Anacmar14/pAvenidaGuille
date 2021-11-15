@@ -1,4 +1,20 @@
 $(document).ready(function () {
+  var entrar=0;
+  opcion = 0;
+  $.ajax({
+      url:"../../procesos/cajas/consCaja.php",
+      type:"POST",
+      datatype:"JSON",
+      data: {
+        opcion: opcion,
+      },
+      success: function (data) {
+      result = JSON.parse(data);
+      if (result.length != 0) {
+          entrar = result[0].cjcierre;
+      }
+        if (entrar == 0) {
+  $(".container").css('display', 'block');
 
   var total = 0;
   var id, opcion;
@@ -768,4 +784,15 @@ $(document).ready(function () {
       console.log(objeto);
       window.location.href = '../../graficas/ventas/index.php?fechas='+objeto+'';
     });
+
+
+  
+  
+        }
+        else if (entrar == 1){
+          $(".container").css('display', 'none');
+          $(".mensajeCajaCerrada").css('display', 'flex');
+        }  
+      }
+  })
 });

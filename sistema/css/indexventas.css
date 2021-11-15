@@ -1,7 +1,9 @@
 a {
     text-decoration: none;
 }
-
+.container, .mensajeCajaCerrada {
+    display: none;
+}
 .descuento, .totalt, .clientediv{
     display: flex;
     align-items: center;

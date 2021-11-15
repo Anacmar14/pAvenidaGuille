@@ -28,6 +28,13 @@ $movegresos = (isset($_POST['movimientosegresos'])) ? $_POST['movimientosegresos
 $empid = (isset($_POST['empid'])) ? $_POST['empid'] : '';
 
 switch($opcion){//Consulta por estado de caja
+    case 0;
+        $date = date("Y-m-d");
+        $consulta = "SELECT cjcierre FROM cajas WHERE cjfecha = '$date'";
+        $resultado = $conexion->prepare($consulta);
+        $resultado->execute();
+        $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+        break;
     case 1:   
         $date = date("Y-m-d");
         //$date = '2021-11-06';
