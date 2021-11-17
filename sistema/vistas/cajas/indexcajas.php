@@ -39,7 +39,7 @@ include ("../../procesos/check/check.php");
 
     <div class="container p-4"> 
         <div class="form-group" style="text-align: center">
-            <h3>DATOS DE LA CAJA DE HOY</h3>
+            <h3>DATOS DE LA CAJA NUMERO <label id="numeroDeCaja"></label></h3>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -50,6 +50,12 @@ include ("../../procesos/check/check.php");
                         <div class="form-group">
                             <div class="justify-content-end">
                                 <div class="justify-content-between" style="display: flex; flex-direction: row;">
+                                        <div class='totalDivCol' style="display: flex; align-items: center; margin-right: 0px; padding: 5px;">
+                                            <div class='input-group-prepend'>
+                                                <span class='input-group-text'>Numero de Caja:</span>
+                                            </div>
+                                            <input type="text" class="form-control inputIdCaja"  disabled style='width: 90px;'>
+                                        </div>
                                         <div class='totalDivCol' style="display: flex; align-items: center; margin-right: 0px; padding: 5px;">
                                             <div class='input-group-prepend'>
                                                 <span class='input-group-text'>Fecha y Hora:</span>
@@ -174,7 +180,7 @@ include ("../../procesos/check/check.php");
 
         <br>
         <div class="form-group" style="text-align: center">
-            <h3>TABLA DE MOVIMIENTOS DIARIOS DE HOY</h3>
+            <h3>TABLA DE MOVIMIENTOS DE LA CAJA</h3>
         </div>
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <div class="p-2 flex-grow-1 bd-highlight">
@@ -256,39 +262,62 @@ include ("../../procesos/check/check.php");
             <div class="drowerArqueo">
                 <div class="headerModal" >
                     <div class="d-flex justify-content-between">
-                        <h3 class="tituloTicket">ARQUEO DE CAJAS</h3>
+                        <h3 class="tituloTicket">ARQUEO DETALLADO DE LA CAJA NUMERO <label id="numeroDeCaja2"></label></h3>
                         <button id="cerrarArqueo" class="btn btn-danger">X</button>
                     </div>
                 </div>
-                <div class="tab-pane fade show active" id="tablaCajas" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="p-2 flex-grow-1 bd-highlight">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="table-responsive">
-                                    <table id="tablaCaja"
-                                        class="table table-striped" style="width:100%; text-align: center">
-                                        <thead class="thead-dark">
-                                            <tr>
-                                                <th>Id</th>
-                                                <th>Fecha</th>
-                                                <th>Monto Inicial</th>
-                                                <th>Caja Estado</th>
-                                                <th>Saldo</th>
-                                                <th>Ingreso Ventas</th>
-                                                <th>Egreso Compras</th>
-                                                <th>Ingreso Movimientos</th>
-                                                <th>Egreso Movimientos</th>
-                                                <th>Hora Cierre</th>
-                                                <th>Empleado</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                    <tbody class="table-light"></tbody>
+                <br><br>
+                <div class="container p-10 justify-content-between">
+                    <h4>INGRESOS POR VENTA</h4>
+                    <div class="tab-pane fade show active" id="tablaCajas" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="p-2 flex-grow-1 bd-highlight">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                        <table id="tablaCaja"
+                                            class="table table-striped" style="width:100%; text-align: center">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th>Folio</th>
+                                                    <th>Fecha</th>
+                                                    <th>Cliente</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                        <tbody class="table-light"></tbody>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>  
+                    </div> 
+                </div>
+                <br><br>
+                <div class="container p-10 justify-content-between">
+                    <h4>EGRESOS POR PEDIDO A PROVEEDORES</h4>
+                    <div class="tab-pane fade show active" id="tablaCajas" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="p-2 flex-grow-1 bd-highlight">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                        <table id="tablaCajaDos"
+                                            class="table table-striped" style="width:100%; text-align: center">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th>Folio</th>
+                                                    <th>Fecha</th>
+                                                    <th>Cliente</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                        <tbody class="table-light"></tbody>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
             </div>
     </div>
 

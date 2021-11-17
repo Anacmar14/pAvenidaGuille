@@ -98,6 +98,8 @@ $(document).ready(function () {
                   $("#backModal").css('display', 'flex');
                 }
                 tablaMovimientos();
+                $("#numeroDeCaja").html(caja.cjid);
+                $("#numeroDeCaja2").html(caja.cjid);
                 $('.inputMontoInicial').val(caja.cjmontoincial)
                 $('.inputCajero').val($('#nombreCajero').val())
                 $('.inputFecha').val($('#fechaHora').val())
@@ -135,18 +137,18 @@ $(document).ready(function () {
       
           $(document).on("click", "#cajaDetalle", function () {
             $('#tablaCaja').DataTable().destroy();
-            opcion = 3;
-            tablaProductos = $("#tablaCaja").DataTable({
-              lengthMenu: [[5], [5]],
+            opcion = 9;
+            tablaHistorialVentas = $("#tablaCaja").DataTable({
+              lengthMenu: [[6], [6]],
               language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de _TOTAL_ Cajas",
-                "infoEmpty": "Mostrando 0 to 0 of 0 Cajas",
-                "infoFiltered": "(Filtrado de _MAX_ total Cajas)",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Ventas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Ventas",
+                "infoFiltered": "(Filtrado de _MAX_ total Venta)",
                 "infoPostFix": "",
                 "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ Cajas",
+                "lengthMenu": "Mostrar _MENU_ Ventas",
                 "loadingRecords": "Cargando...",
                 "processing": "Procesando...",
                 "search": "Buscar:",
@@ -156,26 +158,58 @@ $(document).ready(function () {
                     "last": "Ultimo",
                     "next": "Siguiente",
                     "previous": "Anterior"
-                  }
+                }
               },
               ajax: {
-                url: "../../procesos/cajas/consCaja.php",
+                url: "../../procesos/ventas/consVentas.php",
                 method: "POST", //usamos el metodo POST
-                data: { opcion: opcion }, //enviamos opcion 3
+                data: { opcion: opcion,
+                  cjid: caja.cjid, }, //enviamos opcion 4 para que haga un SELECT
                 dataSrc: "",
               },
               columns: [
-                { data: "cjid" },
-                { data: "cjfecha" },
-                { data: "cjmontoincial" },
-                { data: "tipocajadesc" },
-                { data: "cjsaldo" },
-                { data: "cjtoting" },
-                { data: "cjtotegr" },
-                { data: "cjtotalingmov" },
-                { data: "cjtotalegrmov" },
-                { data: "cjfechahoracierre" },
-                { data: "empnom" },    
+                { data: "fvid" },
+                { data: "fvfechahora" },
+                { data: "clnom" },
+                { data: "fvtotal" },
+              ],
+            });
+            $('#tablaCajaDos').DataTable().destroy();
+            opcion = 9;
+            tablaHistorialVentas = $("#tablaCajaDos").DataTable({
+              lengthMenu: [[6], [6]],
+              language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Compras",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Ventas",
+                "infoFiltered": "(Filtrado de _MAX_ total Compra)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Compras",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+              },
+              ajax: {
+                url: "../../procesos/compras/consCompras.php",
+                method: "POST", //usamos el metodo POST
+                data: { opcion: opcion,
+                  cjid: caja.cjid, }, //enviamos opcion 4 para que haga un SELECT
+                dataSrc: "",
+              },
+              columns: [
+                { data: "fcid" },
+                { data: "fcfechahora" },
+                { data: "provnom" },
+                { data: "fctotal" },
               ],
             });
             $("#arqueoCaja").css('display', 'flex');
@@ -272,6 +306,7 @@ $(document).ready(function () {
                 let ingresos = result[1].ingresos
                 let movimientosingresos = result[2].movimientosingresos
                 let movimientosegresos = result[3].movimientosegresos
+                $('.inputIdCaja').val(caja.cjid);
                 $('.inputIngVen').val(ingresos);
                 $('.inputEgrComp').val(egresos);
                 $('.inputIngMov').val(movimientosingresos);

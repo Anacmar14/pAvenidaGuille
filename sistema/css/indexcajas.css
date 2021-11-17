@@ -83,7 +83,7 @@ a {
 
 #CajaCerrada{
     position: absolute;
-    padding: 420px;
+    padding: 400px;
     padding-left: 1000px;
     background: rgba(75, 75, 75, 0.452);
     z-index: 99999;
@@ -107,6 +107,6 @@ a {
 
 
 #cerrarCaja, #subirCaja {
-    width: 60px;
+    width: 50px;
 }
 

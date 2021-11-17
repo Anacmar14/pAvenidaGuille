@@ -1,11 +1,11 @@
 <?php
 	require_once "php/conexion.php";
 	$conexion=conexion();
-	// $fechas= $_GET['fechas'];
-	// $fechas = json_decode($fechas,true);
-	// $desde= $fechas['desde'];
-	// $hasta= $fechas['hasta'];
-	$sql="SELECT fvfechahora, fvtotal from facturasventas WHERE is_delete = 0 order by fvfechahora";
+	$fechas= $_GET['fechas'];
+	$fechas = json_decode($fechas,true);
+	$desde= $fechas['desde'];
+	$hasta= $fechas['hasta'];
+	$sql="SELECT fvfechahora as fecha, COUNT(fvtotal) as totalventas FROM facturasventas WHERE fvfechahora BETWEEN '$desde' AND '$hasta' GROUP BY month(fvfechahora)";
 	$result=mysqli_query($conexion,$sql);
 	$valoresY=array();//montos
 	$valoresX=array();//fechas
@@ -37,19 +37,41 @@
 	datosX=crearCadenaBarras('<?php echo $datosX ?>');
 	datosY=crearCadenaBarras('<?php echo $datosY ?>');
 
-		var data = [{
-	values: [300, 200, 100],
-	labels: ['Cantidad De Stock Actual', 'Non-Residential', 'Utility'],
-	type: 'pie'
-	}];
-
+	var data = [
+		{
+			x: datosX,
+			y: datosY,
+			type: 'bar'
+		}
+	];
 	var layout = {
-		title: 'Show Edit in Chart Studio Modebar Button'
-	};
-
-	var config = {
-	showEditInChartStudio: true,
-	plotlyServerURL: "https://chart-studio.plotly.com"
+	title:'VENTAS AGRUPADAS POR MES',
+	height: 550,
+	font: {
+		family: 'Lato',
+		size: 16,
+		color: 'rgb(100,150,200)'
+	},
+	plot_bgcolor: 'rgba(200,255,0,0.1)',
+	margin: {
+		pad: 10
+	},
+	xaxis: {
+		title: 'FECHAS',
+		titlefont: {
+		color: 'black',
+		size: 24
+		},
+		rangemode: 'tozero'
+	},
+	yaxis: {
+		title: 'CANTIDAD',
+		titlefont: {
+		color: 'black',
+		size: 24
+		},
+		rangemode: 'tozero'
+	}
 	};
 
 	Plotly.plot( cargaBarras, data, layout );

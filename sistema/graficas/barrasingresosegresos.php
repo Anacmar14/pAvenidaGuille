@@ -5,7 +5,7 @@
 	$fechas = json_decode($fechas,true);
 	$desde= $fechas['desde'];
 	$hasta= $fechas['hasta'];
-	$sql="SELECT fvfechahora, fvtotal from facturasventas WHERE is_delete = 0 AND fvfechahora BETWEEN '$desde' AND '$hasta' order by fvfechahora";
+	$sql="SELECT cjfecha as fecha, SUM(cjtoting) as totalingresos, SUM(cjtotegr) as totalegresos FROM cajas WHERE cjfecha BETWEEN '$desde' AND '$hasta' GROUP BY month(cjfecha)";
 	$result=mysqli_query($conexion,$sql);
 	$valoresY=array();//montos
 	$valoresX=array();//fechas
@@ -13,10 +13,12 @@
 	while ($ver=mysqli_fetch_row($result)) {
 		$valoresY[]=$ver[1];
 		$valoresX[]=$ver[0];
+		$valoresD[]=$ver[2];
 	}
 
 	$datosX=json_encode($valoresX);
 	$datosY=json_encode($valoresY);
+	$datosD=json_encode($valoresD);
  ?>
 
 <div id="graficaBarras"></div>
@@ -36,17 +38,29 @@
 
 	datosX=crearCadenaBarras('<?php echo $datosX ?>');
 	datosY=crearCadenaBarras('<?php echo $datosY ?>');
+	datosD=crearCadenaBarras('<?php echo $datosD ?>');
 
-	var data = [
-		{
-			x: datosX,
-			y: datosY,
-			type: 'bar'
-		}
-	];
+	console.log(datosX)
+	console.log(datosY)
+	console.log(datosD)
+	var Ingresos = {
+	x: datosX,
+	y: datosY,
+	type: 'bar',
+	name: 'Ingresos'
+	};
+
+	var Egresos = {
+	x: datosX,
+	y: datosD,
+	type: 'bar',
+	name: 'Egresos'
+	};
+
+	var data = [Ingresos, Egresos];
 
 	var layout = {
-	title:'Grafico de ventas',
+	title:'Ingresos y Egresos de las cajas por mes',
 	height: 550,
 	font: {
 		family: 'Lato',
@@ -58,7 +72,7 @@
 		pad: 10
 	},
 	xaxis: {
-		title: 'Fechas',
+		title: 'FECHAS',
 		titlefont: {
 		color: 'black',
 		size: 24
@@ -66,7 +80,7 @@
 		rangemode: 'tozero'
 	},
 	yaxis: {
-		title: 'Total de la Venta',
+		title: 'CANTIDAD',
 		titlefont: {
 		color: 'black',
 		size: 24

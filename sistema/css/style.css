@@ -95,14 +95,23 @@ a[data-toggle="collapse"] {
     transform: translateY(-50%);
 }
 
-#content {
+#content1 {
     width: 100%;
-    padding: 40px;
+    height: 100%;
     min-height: 100vh;
     transition: all 0.3s;
-    margin-top: 70px;
-    background: grey;
+    background-image: url("https://www.wallpaperuse.com/wallp/85-852362_m.jpg");
+    background-position:bottom;
+    background-size: cover; 
+    background-repeat: no-repeat;  
 }
+#content {
+  width: 100%;
+  padding: 40px;
+  min-height: 100vh;
+  transition: all 0.3s;
+  margin-top: 70px;
+  background: grey;}
 @media (max-width:800px) {
   #sidebar {
     margin-left: -250px;}
@@ -123,4 +132,8 @@ a[data-toggle="collapse"] {
   #logo {
     display: none;
   }
+}
+
+.collapsed ul{
+  list-style: none;
 }

@@ -4,6 +4,7 @@ include_once '../../bd/db2.php';
 
 $folio = (isset($_POST['folio'])) ? $_POST['folio'] : '';
 $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
+$cjid = (isset($_POST['cjid'])) ? $_POST['cjid'] : '';
 
 switch($opcion){
     case 1: // cambia la anulacion de venta
@@ -45,6 +46,11 @@ switch($opcion){
 
     case 8: // select de historial de ventas historico
         $consulta = "SELECT fvid, cjid, fvfechahora, clnom, fvtotal FROM facturasventas INNER JOIN clientes ON facturasventas.clid = clientes.clid AND is_delete = 0 AND is_check = 1";
+        $resultado= mysqli_query($conn, $consulta);     
+        $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+        break;
+    case 9: // select de historial de ventas historico segun caja
+        $consulta = "SELECT fvid, cjid, fvfechahora, clnom, fvtotal FROM facturasventas INNER JOIN clientes ON facturasventas.clid = clientes.clid AND is_delete = 0 AND is_check = 1 AND cjid = '$cjid'";
         $resultado= mysqli_query($conn, $consulta);     
         $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
         break;

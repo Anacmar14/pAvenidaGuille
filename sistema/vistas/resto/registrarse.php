@@ -8,9 +8,10 @@ include ("../../../sistema/partes/loginstyle.php");
 ?>
 
 <div id="content">
-<div class="container p-4"> 
+<div class="container" style="margin-top:150px">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
 
             <?php if(isset($_SESSION['message'])) { ?>
                 <div class="alert alert-<?= $_SESSION['message_type'] ?> alert-dismissible fade show" role="alert">
@@ -25,25 +26,25 @@ include ("../../../sistema/partes/loginstyle.php");
                 include ("../../../sistema/sesion/alerta.php");
             ?>
 
-            <div class="card card-body">
+            <div class="card card-body" style="background-color:#343a40;">
                 <form action="../../../sistema/procesos/save/saveregistrarse.php" method="POST">
                     <div class="form-group">
-                            <h6>REGISTRARSE</h6>
+                            <h5 style="color:white">REGISTRARSE</h5>
                         </div>
                     <div class="form-group">
-                        <label>Nombre:</label>
+                        <label style="color:white">Nombre:</label>
                         <input type="text" name="textunom" class="form-control" placeholder="Ej: Joe Filph" autofocus>
                     </div>
                     <div class="form-group">
-                        <label>Email:</label>
+                        <label style="color:white">Email:</label>
                         <input type="text" name="textuemail" class="form-control" placeholder="Ej: Joefilph@gmail.com" autofocus>
                     </div>
                     <div class="form-group">
-                        <label>Usuario:</label>
+                        <label style="color:white">Usuario:</label>
                         <input type="text" name="textutag" class="form-control" placeholder="Ej: JoeJF" autofocus>
                     </div>
                     <div class="form-group">
-                        <label>Clave:</label>
+                        <label style="color:white">Clave:</label>
                         <input type="text" name="textukey" class="form-control" placeholder="Ej: 123jo" autofocus>
                     </div>
                     <input type="submit" name="save_task" class="btn btn-success btn-block" value="Registrarme">
@@ -54,7 +55,7 @@ include ("../../../sistema/partes/loginstyle.php");
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-3">
         </div>
     </div>
 </div>
