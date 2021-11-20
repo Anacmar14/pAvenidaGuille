@@ -103,13 +103,13 @@ switch($opcion){//Consulta por estado de caja
         $data = $_SESSION['user'];
         break;
     case 8:
-        $consulta= "SELECT SUM(Fctotal) as egresos FROM facturascompras WHERE cjid = '$cjid'"; 
+        $consulta= "SELECT SUM(Fctotal) as egresos FROM facturascompras WHERE cjid = '$cjid' AND is_check = 1"; 
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         while($row=$resultado->fetch(PDO::FETCH_ASSOC)){
             $data[]=$row;
         }
-        $consulta= "SELECT SUM(Fvtotal) as ingresos FROM facturasventas WHERE cjid = '$cjid'"; 
+        $consulta= "SELECT SUM(Fvtotal) as ingresos FROM facturasventas WHERE cjid = '$cjid' AND is_check = 1"; 
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();        
         while($row=$resultado->fetch(PDO::FETCH_ASSOC)){

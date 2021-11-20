@@ -59,6 +59,9 @@
                 <li class="od">
                   <a href="../../../sistema/vistas/ventas/indexventashistorial.php"><i class="fas fa-clipboard-list"></i>Historial de Ventas</a>
                 </li>
+                <li class="od">
+                  <a href="../../../sistema/vistas/delivery/indexdelivery.php"><i class="fas fa-motorcycle"></i>Delivery</a>
+                </li>
             </ul>
         </li>
         <!-- FIN VENTAS -->
@@ -82,11 +85,11 @@
         <li  data-toggle="collapse" data-target="#caja" class="collapsed">
             <a href="#"><i class="fa fa-money"></i> Caja <span class="arrow"></span></a>
             <ul class="list-unstyled sub-menu collapse" style="margin-left:20px" id="caja">
+            <li class="od">
+                <a href="../../../sistema/vistas/cajas/indexcajas.php"><i class="fas fa-box"></i>Caja</a>
+            </li>
               <li class="od oc">
                 <a href="../../../sistema/vistas/movimientos/indexmovimientos.php"><i class="fas fa-sync"></i>Movimientos</a>
-              </li>
-              <li class="od">
-                <a href="../../../sistema/vistas/cajas/indexcajas.php"><i class="fas fa-box"></i>Caja</a>
               </li>
             </ul>
         </li>
@@ -111,6 +114,11 @@
         <!-- CLIENTES -->
         <li class="od">
           <a href="../../../sistema/vistas/clientes/indexclientes.php"><i class="fas fa-user-friends"></i>Clientes</a>
+        </li>
+        <!-- FIN CLIENTES -->
+        <!-- CLIENTES -->
+        <li class="od">
+          <a href="../../../sistema/vistas/cliente/indexclientecarrito.php"><i class="fas fa-shopping-cart"></i>Carrito de Clientes</a>
         </li>
         <!-- FIN CLIENTES -->
         <!-- REPORTES -->

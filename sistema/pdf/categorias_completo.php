@@ -80,7 +80,7 @@
                 if (isset($_GET['excel'])) 
                 {
                     header('Content-type:application/vnd.ms-excel; charset-UT-8');
-                    header('Content-Disposition: attachment;filename=marcas_completo.xls');
+                    header('Content-Disposition: attachment;filename=categorias_completo.xls');
                     header('Pragma: no-cache');
                     header('Expires: 0');
                     $sql = "SELECT * FROM categorias";

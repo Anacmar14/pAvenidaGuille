@@ -36,13 +36,14 @@
 
 <div id="content">
     <div class="container p-4">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card card-header">
+        <h6>Editar Proveedor</h6>
+        </div>
         <div class="row">
-            <div class="col-md-4 mx-auto">
+            <div class="col-md-12 mx-auto">
                 <div class="card card-body">
                     <form action="../edit/editproveedores.php?id=<?php echo $_GET['id'] ?>" method="POST">
-                    <div class="form-group">
-                            <h6>EDITAR EL PROVEEDOR</h6>
-                        </div>
                         <div class="form-group">
                             <label>Nombre:</label>
                             <input type="text" name="pnom" value="<?php echo $row['provnom']; ?>" class="form-control" placeholder="Nuevo Nombre" autofocus>

@@ -34,13 +34,14 @@
 
 <div id="content">
     <div class="container p-4">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card card-header">
+        <h6>Editar Rol</h6>
+        </div>
         <div class="row">
-            <div class="col-md-4 mx-auto">
+            <div class="col-md-12 mx-auto">
                 <div class="card card-body">
                     <form action="../edit/editroles.php?id=<?php echo $_GET['id'] ?>" method="POST">
-                        <div class="form-group">
-                            <h6>EDITAR ROL</h6>
-                        </div>
                         <div class="form-group">
                             <label>ROL:</label>
                             <input type="text" name="rolnombre" value="<?php echo $row['rolnom']; ?>" class="form-control" placeholder="Nuevo ROL" autofocus>

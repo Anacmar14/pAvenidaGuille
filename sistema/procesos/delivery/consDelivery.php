@@ -1,0 +1,39 @@
+<?php
+include_once '../../bd/db2.php';
+
+$opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
+$fvid = (isset($_POST['fvid'])) ? $_POST['fvid'] : '';
+$empid = (isset($_POST['deliveryid'])) ? $_POST['deliveryid'] : '';
+$deliverydireccion = (isset($_POST['deliverydireccion'])) ? $_POST['deliverydireccion'] : '';
+$estado = (isset($_POST['estado'])) ? $_POST['estado'] : '';
+
+switch($opcion){
+    case 1:
+        $consulta = "INSERT INTO delivery(deliverydireccion, fvid, empid, deliveryestado) VALUES ('$deliverydireccion','$fvid','$empid',1)";
+        $resultado= mysqli_query($conn, $consulta);     
+        break;
+    case 2:
+        $consulta = "SELECT fvid,deliverydireccion,empnom, deliverydescripcion, created_at, TIMESTAMPDIFF(minute, created_at, updated_at)AS Minutos, updated_at FROM delivery, empleados, deliverytiposestados WHERE delivery.empid = empleados.empid AND deliveryestado = deliverytipo";
+        $resultado= mysqli_query($conn, $consulta);     
+        $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+        break;
+    case 3:
+        $consulta = "SELECT fvid,deliveryestado, deliverydescripcion FROM delivery, deliverytiposestados WHERE fvid = '$fvid' AND deliveryestado = deliverytipo";
+        $resultado= mysqli_query($conn, $consulta);     
+        $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+        break;
+    case 4:
+        $consulta = "UPDATE delivery SET deliveryestado = '$estado', updated_at = CURRENT_TIME WHERE fvid = '$fvid'";
+        $resultado= mysqli_query($conn, $consulta);     
+        $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+        break;
+    case 5:
+        $consulta = "DELETE FROM delivery WHERE fvid = '$fvid'";
+        $resultado= mysqli_query($conn, $consulta);     
+        $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+        break;
+}
+
+
+print json_encode($data, JSON_UNESCAPED_UNICODE); //enviar el array final en formato json a JS
+$conexion = NULL;

@@ -11,17 +11,21 @@ $(document).ready(function () {
       },
       success: function (data) {
       result = JSON.parse(data);
-      if (result.length != 0) {
-          entrar = result[0].cjcierre;
-      }
-        if (entrar == 0) {
-          $(".container").css('display', 'block');
+        if (result.length != 0) {
+            entrar = result[0].cjcierre;
+          if (entrar == 0) {
+            $(".container").css('display', 'block');
+          }
+          else if (entrar == 1){  
+            $(".container").css('display', 'none');
+            $(".mensajeCajaCerrada").css('display', 'flex');
+          }  
         }
-        else if (entrar == 1){  
+        else {
           $(".container").css('display', 'none');
           $(".mensajeCajaCerrada").css('display', 'flex');
-        }  
         }
+      }
       })
       
   var total = 0;
@@ -375,6 +379,12 @@ $(document).ready(function () {
                     data: { opcion: opcion,
                       folio: folio
                     },
+                    success: function (data) {
+                      $('#tablaHistorialCompras').DataTable().destroy();
+                      $('#tablaComprasLista').DataTable().destroy();
+                      reloadTablaHistorial();
+                      reloadTablaLista();
+                    }
                   }) 
               }
             }) 

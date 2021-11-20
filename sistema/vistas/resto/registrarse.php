@@ -7,7 +7,7 @@ include ("../../../sistema/partes/header.php");
 include ("../../../sistema/partes/loginstyle.php");
 ?>
 
-<div id="content">
+<div id="content1">
 <div class="container" style="margin-top:150px">
     <div class="row">
         <div class="col-md-3"></div>

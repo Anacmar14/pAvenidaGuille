@@ -24,7 +24,7 @@ switch($opcion){
         break;    
 
     case 4: // select de historial de ventas
-        $consulta = "SELECT fvid, cjid, fvfechahora, clnom, fvtotal FROM facturasventas INNER JOIN clientes ON facturasventas.clid = clientes.clid AND is_delete = 0";
+        $consulta = "SELECT fvid, cjid, fvfechahora, clnom, fvtotal, ventadesc, empnom FROM facturasventas INNER JOIN clientes ON facturasventas.clid = clientes.clid AND is_delete = 0 AND is_check = 0 INNER JOIN tipoventa ON tipo = ventaid INNER JOIN empleados ON facturasventas.empid = empleados.empid";
         $resultado= mysqli_query($conn, $consulta);     
         $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
         break;

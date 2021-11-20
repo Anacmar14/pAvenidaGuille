@@ -34,13 +34,14 @@
 
 <div id="content">
     <div class="container p-4">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card card-header">
+        <h6>Editar Nombre de Categoria de Producto</h6>
+        </div>
         <div class="row">
-            <div class="col-md-4 mx-auto">
+            <div class="col-md-12 mx-auto">
                 <div class="card card-body">
                     <form action="../edit/editcategorias.php?id=<?php echo $_GET['id'] ?>" method="POST">
-                        <div class="form-group">
-                            <h6>EDITAR NOMBRE DE LA CATEGORIA DE PRODUCTO</h6>
-                        </div>
                         <div class="form-group">
                             <label>Nombre:</label>
                             <input type="text" name="nnom" value="<?php echo $row['canom']; ?>" class="form-control" placeholder="Nuevo Nombre" autofocus>

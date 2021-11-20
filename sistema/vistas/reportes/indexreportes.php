@@ -14,14 +14,22 @@ include ("../../procesos/check/check.php");
 <head>
 </head>
 <body>
-  <div id="content">
-    <div class="col-md-4 ov">
+<div id="content">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card">
+            <div class="card-header">
+              <h4>Reportes Gráficos</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+              <div class="col-md-3 ov"></div>
+            <div class="col-md-6 ov">
         <div class="card card-body">
               <div class="form-group">
-                  <h6>REPORTES EN GRAFICO</h6>
+                  <h6>Seleccione los datos que desea visualizar</h6>
               </div>
               <div class="form-group">
-                  <label>Graficos:</label>
+                  <label>Gráficos:</label>
                   <select name="tipoGrafico" id="tipoGrafico" class="form-control">      
                     <option value="1">Total de ingresos de ventas por mes</option>
                     <option value="2">Los tres ultimos productos con el stock minimo</option>
@@ -38,6 +46,9 @@ include ("../../procesos/check/check.php");
               </div>
               <button type="submit" id="addGraficar" class="btn btn-success">Enviar</button>
         </div>
+            </div>
+ 
+            </div>
 
         <script src="../../../sistema/jquery/jquery-3.3.1.min.js"></script>
         <script src="../../../sistema/popper/popper.min.js"></script>

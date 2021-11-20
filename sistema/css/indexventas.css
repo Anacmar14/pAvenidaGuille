@@ -9,7 +9,7 @@ a {
     align-items: center;
 }
 
-#total, #tablaClientesCli, #clienteModalLabel, #totalModalLabel, #subTotalModalLabel, #facturaModalLabel, #descuentoModalLabel {
+#total, #tablaClientesCli, #clienteModalLabel, #totalModalLabel, #subTotalModalLabel, #facturaModalLabel, #descuentoModalLabel, #cajaDelDiaModalLabel {
     margin-bottom: 0;
 }
 

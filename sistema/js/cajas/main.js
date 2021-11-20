@@ -14,10 +14,12 @@ $(document).ready(function () {
           entrar = result[0].cjcierre;
       }
         if (entrar == 0) {
-          $(".container").css('display', 'block');
+          $(".saludos").css('display', 'block');
+          $("#antesDeMensaje").css('display', 'none');
         }
         else if (entrar == 1){
-          $(".container").css('display', 'none');
+          $("#antesDeMensaje").css('display', 'block');
+          $(".saludos").css('display', 'none');
           $(".mensajeCajaCerrada").css('display', 'flex');
           $("#opcionAdministrador").css('display', 'flex');
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-11-2021 a las 17:54:30
+-- Tiempo de generación: 20-11-2021 a las 03:24:42
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -46,10 +46,15 @@ CREATE TABLE `cajas` (
 --
 
 INSERT INTO `cajas` (`cjid`, `cjfecha`, `cjmontoincial`, `cjcierre`, `cjsaldo`, `cjtoting`, `cjtotegr`, `cjtotalingmov`, `cjtotalegrmov`, `cjfechahoracierre`, `empid`) VALUES
-(0, '0000-00-00', 500, 0, 0, 0, 0, 0, 0, '0000-00-00 00:00:00', 1),
+(0, '0000-00-00', 0, 0, 0, 0, 0, 0, 0, '0000-00-00 00:00:00', 1),
 (1, '2021-11-01', 500, 0, 0, 0, 0, 0, 0, '2021-11-01 00:00:00', 2),
-(33, '2021-11-05', 0, 0, 0, 0, 0, 0, 0, '0000-00-00 00:00:00', 1),
-(94, '2021-11-15', 1000, 0, 1000, 0, 0, 0, 0, '2021-11-15 01:40:00', 33);
+(33, '2021-10-10', 5000, 1, 432, 300, 200, 0, 0, '0000-00-00 00:00:00', 1),
+(94, '2021-10-10', 1000, 1, 1350, 350, 693, 0, 0, '2021-11-15 07:22:00', 33),
+(95, '2021-11-15', 5000, 1, 5600, 1200, 600, 100, 100, '2021-11-15 08:44:00', 33),
+(96, '2021-11-16', 7000, 1, 4500, 1100, 3600, 100, 100, '2021-11-16 03:43:00', 33),
+(98, '2021-11-17', 5000, 1, 1340, 640, 4000, 100, 400, '2021-11-17 04:40:00', 33),
+(99, '2021-11-18', 5000, 1, 0, 0, 0, 0, 0, '0000-00-00 00:00:00', 1),
+(103, '2021-11-19', 5000, 1, 685, 1035, 8000, 2750, 100, '2021-11-19 11:17:00', 33);
 
 -- --------------------------------------------------------
 
@@ -145,6 +150,52 @@ INSERT INTO `clientes` (`clid`, `clnom`, `clemail`, `cldire`, `cltele`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `delivery`
+--
+
+CREATE TABLE `delivery` (
+  `fvid` int(11) NOT NULL,
+  `deliverydireccion` varchar(60) NOT NULL,
+  `empid` int(11) NOT NULL,
+  `deliveryestado` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `delivery`
+--
+
+INSERT INTO `delivery` (`fvid`, `deliverydireccion`, `empid`, `deliveryestado`, `created_at`, `updated_at`) VALUES
+(78, 'Vicente Lopez 2722', 9, 4, '2021-11-17 19:11:20', '2021-11-17 20:29:33'),
+(79, 'Cordoba 33', 9, 4, '2021-11-17 18:50:08', '2021-11-17 19:13:06'),
+(80, 'Zuviria', 29, 4, '2021-11-17 20:28:56', '2021-11-17 23:35:37'),
+(81, 'Av san martin', 29, 4, '2021-11-17 19:16:52', '2021-11-17 20:29:38');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `deliverytiposestados`
+--
+
+CREATE TABLE `deliverytiposestados` (
+  `deliverytipo` int(11) NOT NULL,
+  `deliverydescripcion` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `deliverytiposestados`
+--
+
+INSERT INTO `deliverytiposestados` (`deliverytipo`, `deliverydescripcion`) VALUES
+(1, 'Asignado'),
+(2, 'Entregado a Delivery'),
+(3, 'En Camino'),
+(4, 'Finalizada');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `detallescompras`
 --
 
@@ -168,7 +219,17 @@ INSERT INTO `detallescompras` (`dcorden`, `fcid`, `proid`, `dccantidad`, `dcprec
 (1, 6, 53, 20, 100, 2000),
 (1, 7, 1, 10, 400, 4000),
 (1, 8, 1, 1, 400, 400),
-(2, 2, 36, 1, 150, 150);
+(1, 9, 62, 1, 200, 200),
+(1, 10, 62, 3, 200, 600),
+(1, 11, 1, 5, 400, 2000),
+(1, 12, 62, 20, 200, 4000),
+(1, 13, 1, 1, 400, 400),
+(1, 14, 2, 1, 400, 400),
+(1, 15, 17, 20, 400, 8000),
+(2, 2, 36, 1, 150, 150),
+(2, 11, 2, 3, 400, 1200),
+(2, 14, 1, 1, 400, 400),
+(3, 11, 3, 1, 400, 400);
 
 -- --------------------------------------------------------
 
@@ -205,14 +266,33 @@ INSERT INTO `detallesventas` (`dvorden`, `fvid`, `proid`, `dvcantidad`, `dvpreci
 (1, 65, 2, 1, 400, 400),
 (1, 70, 13, 1, 400, 400),
 (1, 71, 18, 1, 280, 280),
+(1, 72, 1, 1, 400, 400),
+(1, 73, 1, 1, 400, 400),
+(1, 74, 1, 1, 400, 400),
+(1, 75, 2, 1, 400, 400),
+(1, 76, 5, 1, 350, 350),
+(1, 77, 1, 3, 400, 1200),
+(1, 78, 4, 1, 350, 350),
+(1, 79, 1, 1, 400, 400),
+(1, 80, 1, 1, 400, 400),
+(1, 81, 1, 1, 400, 400),
+(1, 84, 4, 1, 350, 350),
+(1, 85, 4, 1, 350, 350),
+(1, 86, 1, 2, 400, 800),
 (2, 53, 2, 1, 400, 400),
 (2, 54, 2, 7, 400, 2800),
 (2, 55, 22, 1, 400, 400),
 (2, 60, 2, 1, 400, 400),
 (2, 61, 2, 2, 400, 800),
+(2, 78, 5, 1, 350, 350),
+(2, 79, 2, 1, 400, 400),
+(2, 81, 2, 1, 400, 400),
+(2, 85, 3, 1, 400, 400),
+(2, 86, 4, 1, 350, 350),
 (3, 54, 3, 9, 400, 3600),
 (3, 55, 23, 1, 400, 400),
 (3, 60, 3, 1, 400, 400),
+(3, 78, 3, 1, 400, 400),
 (4, 54, 4, 9, 350, 3150),
 (4, 55, 24, 1, 400, 400),
 (4, 60, 4, 1, 350, 350),
@@ -240,42 +320,17 @@ CREATE TABLE `empleados` (
 --
 
 INSERT INTO `empleados` (`empid`, `empnom`, `empemail`, `emptag`, `empkey`, `emprol`) VALUES
+(0, '', '', '', '', 4),
 (1, 'Dalton Aguilar', 'daltonaguilar3128@protonmail.com', 'DaltonA', 'ec6a6536ca304edf844d1d248a4f08dc', 4),
 (2, 'Amos Gimenez', 'amosgimenez@icloud.net', 'AmosG', 'ec6a6536ca304edf844d1d248a4f08dc', 4),
 (3, 'Kyla Crespo', 'kylacrespo7098@icloud.org', 'KylaC', 'ec6a6536ca304edf844d1d248a4f08dc', 2),
 (4, 'Lucy Castro', 'lucycastro@yahoo.org', 'LucyC', 'ec6a6536ca304edf844d1d248a4f08dc', 2),
 (5, 'Elmo Ramirez', 'elmoramirez6572@google.ca', 'ElmoR', 'ec6a6536ca304edf844d1d248a4f08dc', 4),
 (6, 'Alvin Delgado', 'alvindelgado@aol.ca', 'AlvinD', 'ec6a6536ca304edf844d1d248a4f08dc', 4),
-(9, 'Clementine Ruiz', 'clementineruiz@hotmail.ca', 'ClemeR', 'ec6a6536ca304edf844d1d248a4f08dc', 4),
-(29, 'blanquito', 'blanquito@gmail.com', 'Blanquito', '81dc9bdb52d04dc20036dbd8313ed055', 3),
+(9, 'Ber', 'berberber@hotmail.ca', 'Ber', '7363a0d0604902af7b70b271a0b96480', 8),
+(29, 'Nacho', 'nacho@gmail.com', 'Nacho', '7363a0d0604902af7b70b271a0b96480', 8),
 (33, 'admin', 'admin@admin.gmail', 'admin', '21232f297a57a5a743894a0e4a801fc3', 1),
 (36, 'Matias', 'matiasmatias@gmail.com', 'Mati', '202cb962ac59075b964b07152d234b70', 2);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `empresas`
---
-
-CREATE TABLE `empresas` (
-  `emsid` int(11) NOT NULL,
-  `emsnombre` varchar(50) NOT NULL,
-  `emssocial` varchar(50) NOT NULL,
-  `emsemail` varchar(50) NOT NULL,
-  `emsdireccion` varchar(50) NOT NULL,
-  `emstelefono` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `facturacompxobligaciones`
---
-
-CREATE TABLE `facturacompxobligaciones` (
-  `fcid` int(11) NOT NULL,
-  `oblid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -305,7 +360,12 @@ INSERT INTO `facturascompras` (`fcid`, `provid`, `cjid`, `fcfechahora`, `fctotal
 (5, 1, 1, '2021-11-09 17:13:59', 2000, 0, 1),
 (6, 4, 1, '2021-11-09 17:53:33', 2000, 0, 1),
 (7, 0, 1, '2021-11-11 19:57:49', 4000, 0, 1),
-(8, 0, 1, '2021-11-11 20:10:42', 400, 0, 1);
+(8, 0, 1, '2021-11-11 20:10:42', 400, 0, 1),
+(9, 1, 94, '2021-11-15 22:58:36', 200, 0, 0),
+(10, 1, 95, '2021-11-15 23:00:48', 600, 0, 0),
+(11, 0, 96, '2021-11-16 14:55:27', 3600, 1, 0),
+(12, 1, 98, '2021-11-17 19:33:29', 4000, 0, 1),
+(15, 0, 103, '2021-11-20 00:55:05', 8000, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -321,6 +381,8 @@ CREATE TABLE `facturasventas` (
   `fvdescuento` int(11) NOT NULL,
   `fvsubtotal` double NOT NULL,
   `fvtotal` double NOT NULL,
+  `tipo` int(11) NOT NULL,
+  `empid` int(11) NOT NULL,
   `is_delete` int(11) NOT NULL,
   `is_check` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -329,22 +391,33 @@ CREATE TABLE `facturasventas` (
 -- Volcado de datos para la tabla `facturasventas`
 --
 
-INSERT INTO `facturasventas` (`fvid`, `clid`, `cjid`, `fvfechahora`, `fvdescuento`, `fvsubtotal`, `fvtotal`, `is_delete`, `is_check`) VALUES
-(53, 1, 1, '2021-11-11 16:19:57', 0, 800, 800, 0, 0),
-(54, 0, 1, '2021-11-11 16:28:29', 0, 14700, 14700, 0, 0),
-(55, 0, 1, '2021-11-11 16:31:05', 0, 1950, 1950, 1, 0),
-(56, 0, 1, '2021-11-11 20:02:05', 0, 400, 400, 1, 0),
-(57, 41, 1, '2021-11-11 20:16:31', 10, 4000, 3600, 1, 1),
-(58, 0, 1, '2021-11-11 20:19:28', 15, 2000, 2000, 0, 1),
-(59, 0, 1, '2021-11-11 20:22:20', 0, 400, 400, 0, 1),
-(60, 47, 1, '2021-11-12 19:35:37', 10, 1900, 1710, 0, 0),
-(61, 0, 1, '2021-11-13 18:02:15', 0, 1600, 1600, 0, 0),
-(62, 2, 1, '2021-11-13 18:44:48', 0, 1600, 1600, 0, 0),
-(63, 16, 1, '2021-11-13 19:51:29', 20, 1600, 1600, 0, 1),
-(64, 0, 33, '2021-11-15 09:56:54', 0, 400, 400, 0, 0),
-(65, 0, 33, '2021-11-15 09:56:59', 0, 400, 400, 0, 0),
-(70, 0, 1, '2021-11-15 12:23:04', 0, 400, 400, 0, 0),
-(71, 0, 1, '2021-11-15 12:27:02', 0, 280, 280, 0, 0);
+INSERT INTO `facturasventas` (`fvid`, `clid`, `cjid`, `fvfechahora`, `fvdescuento`, `fvsubtotal`, `fvtotal`, `tipo`, `empid`, `is_delete`, `is_check`) VALUES
+(53, 1, 1, '2021-08-01 21:28:59', 0, 800, 800, 0, 0, 0, 1),
+(54, 0, 1, '2021-08-02 21:29:03', 0, 14700, 14700, 0, 0, 0, 1),
+(55, 0, 1, '2021-09-03 21:28:54', 0, 1950, 1950, 0, 0, 1, 0),
+(56, 0, 1, '2021-09-04 21:29:11', 0, 400, 400, 0, 0, 1, 0),
+(57, 41, 1, '2021-09-11 21:29:19', 10, 4000, 3600, 0, 0, 1, 1),
+(58, 0, 1, '2021-10-10 21:29:24', 15, 2000, 2000, 0, 0, 0, 1),
+(59, 0, 1, '2021-10-11 21:29:28', 0, 400, 400, 0, 0, 0, 1),
+(60, 47, 1, '2021-10-14 19:35:37', 10, 1900, 1710, 0, 0, 0, 1),
+(61, 0, 1, '2021-10-15 18:02:15', 0, 1600, 1600, 0, 0, 0, 1),
+(62, 2, 1, '2021-11-13 18:44:48', 0, 1600, 1600, 0, 0, 0, 1),
+(63, 16, 1, '2021-11-13 19:51:29', 20, 1600, 1600, 0, 0, 0, 1),
+(64, 0, 33, '2021-11-15 09:56:54', 0, 400, 400, 0, 0, 0, 1),
+(65, 0, 33, '2021-11-15 09:56:59', 0, 400, 400, 0, 0, 0, 1),
+(70, 0, 1, '2021-11-15 12:23:04', 0, 400, 400, 0, 0, 0, 1),
+(71, 0, 1, '2021-11-15 12:27:02', 0, 280, 280, 0, 0, 0, 1),
+(72, 0, 0, '2021-12-01 19:46:10', 0, 400, 400, 0, 0, 0, 0),
+(73, 1, 0, '2021-11-15 19:48:07', 0, 400, 400, 0, 0, 0, 1),
+(74, 0, 0, '2021-11-15 19:50:42', 0, 400, 400, 0, 0, 0, 1),
+(75, 3, 0, '2021-11-15 19:51:46', 0, 400, 400, 0, 0, 0, 0),
+(76, 22, 94, '2021-11-15 19:54:49', 0, 350, 350, 0, 0, 0, 1),
+(77, 0, 95, '2021-11-15 20:00:32', 0, 1200, 1200, 0, 0, 0, 1),
+(78, 0, 96, '2021-11-16 11:54:43', 0, 1100, 1100, 0, 0, 0, 1),
+(79, 0, 98, '2021-11-17 16:31:42', 20, 800, 640, 0, 0, 0, 1),
+(80, 0, 98, '2021-11-17 16:41:53', 0, 400, 400, 0, 0, 0, 0),
+(81, 0, 98, '2021-11-17 19:16:06', 0, 800, 800, 0, 0, 1, 0),
+(86, 0, 103, '2021-11-19 21:54:12', 10, 1150, 1035, 0, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -360,19 +433,23 @@ CREATE TABLE `movimientos` (
   `cjid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `obligaciones`
+-- Volcado de datos para la tabla `movimientos`
 --
 
-CREATE TABLE `obligaciones` (
-  `oblid` int(11) NOT NULL,
-  `emsid` int(11) NOT NULL,
-  `oblmonto` int(11) NOT NULL,
-  `oblfechainicio` timestamp NOT NULL DEFAULT current_timestamp(),
-  `oblfechavencimiento` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `movimientos` (`movid`, `movtipo`, `movdinero`, `movdesc`, `cjid`) VALUES
+(75, 1, 100, 'El cadete se deja el aginaldo', 95),
+(76, 0, 100, 'El cadete se roba el aginaldo', 95),
+(77, 1, 100, '100 pesos para la coca', 96),
+(78, 0, 100, 'retirada de esos 100 pesos', 96),
+(79, 1, 100, 'pesitos', 98),
+(80, 0, 400, 'wsad', 98),
+(85, 1, 100, 'no andas?', 103),
+(86, 1, 2000, 'asd', 103),
+(87, 1, 100, 'asd', 103),
+(88, 1, 500, 'asd', 103),
+(89, 1, 50, 'asdasd', 103),
+(90, 0, 100, 'no andas?', 103);
 
 -- --------------------------------------------------------
 
@@ -394,11 +471,11 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`proid`, `procodigo`, `pronombre`, `caid`, `prostockactual`, `proprecio`) VALUES
-(1, '', 'Lomo', 4, 90, 400),
-(2, '', 'Lomo de Cerdo', 4, 50, 400),
-(3, '', 'Lomo de Pollo', 4, 70, 400),
-(4, '', 'Mila', 4, 190, 350),
-(5, '', 'Mila de Cerdo', 4, 10, 350),
+(1, '', 'Lomo', 4, 66, 400),
+(2, '', 'Lomo de Cerdo', 4, 35, 400),
+(3, '', 'Lomo de Pollo', 4, 58, 400),
+(4, '', 'Mila', 4, 175, 350),
+(5, '', 'Mila de Cerdo', 4, -2, 350),
 (6, '', 'Mila de Pollo', 4, 20, 350),
 (7, '', 'Hamburguesa Super', 4, 20, 370),
 (8, '', 'Hamburguesa Super Doble', 4, 20, 400),
@@ -406,12 +483,12 @@ INSERT INTO `productos` (`proid`, `procodigo`, `pronombre`, `caid`, `prostockact
 (10, '', 'Hamburguesa Casera Doble', 4, 20, 400),
 (11, '', 'Hamburguesa de Pollo', 4, 20, 370),
 (12, '', 'Hamburguesa de Cerdo', 4, 20, 370),
-(13, '', 'Matambre', 4, 80, 400),
+(13, '', 'Matambre', 4, 79, 400),
 (14, '', 'Matambre de Cerdo', 4, 20, 400),
 (15, '', 'Bondiola de Cerdo', 4, 20, 400),
 (16, '', 'Paty de Carne', 4, 20, 400),
-(17, '', 'Paty de Pollo', 4, 20, 400),
-(18, '', 'Pizza Muzza', 4, 20, 280),
+(17, '', 'Paty de Pollo', 4, 40, 400),
+(18, '', 'Pizza Muzza', 4, 19, 280),
 (19, '', 'Pizza Especial', 4, 20, 300),
 (20, '', 'Pizza Napolitana', 4, 20, 300),
 (21, '', 'Pizza Fugazzeta', 4, 19, 350),
@@ -455,7 +532,7 @@ INSERT INTO `productos` (`proid`, `procodigo`, `pronombre`, `caid`, `prostockact
 (59, '', 'Agua c/gas 1lt', 1, 20, 180),
 (60, '', 'Cerveza Quilmes 375ml', 2, 20, 100),
 (61, '', 'Cerveza Salta 375ml', 2, 20, 100),
-(62, '', 'Cerveza Quilmes 1lt', 2, 30, 200),
+(62, '', 'Cerveza Quilmes 1lt', 2, 59, 200),
 (63, '', 'Cerveza Salta 1lt', 2, 20, 200);
 
 -- --------------------------------------------------------
@@ -628,7 +705,9 @@ INSERT INTO `roles` (`rolid`, `rolnom`) VALUES
 (1, 'Administrador'),
 (2, 'Cajero'),
 (3, 'Deposito'),
-(4, 'Usuario');
+(4, 'Usuario'),
+(8, 'Delivery'),
+(12, 'Miembro');
 
 -- --------------------------------------------------------
 
@@ -652,6 +731,17 @@ INSERT INTO `tipocaja` (`tipocajaid`, `tipocajadesc`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tipomesa`
+--
+
+CREATE TABLE `tipomesa` (
+  `mesaid` int(11) NOT NULL,
+  `mesadesc` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tipomovimiento`
 --
 
@@ -667,6 +757,26 @@ CREATE TABLE `tipomovimiento` (
 INSERT INTO `tipomovimiento` (`movtipo`, `movnombre`) VALUES
 (0, 'Egreso'),
 (1, 'Ingreso');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipoventa`
+--
+
+CREATE TABLE `tipoventa` (
+  `ventaid` int(11) NOT NULL,
+  `ventadesc` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tipoventa`
+--
+
+INSERT INTO `tipoventa` (`ventaid`, `ventadesc`) VALUES
+(0, ''),
+(1, 'Mesa'),
+(2, 'Delivery');
 
 --
 -- Índices para tablas volcadas
@@ -693,6 +803,20 @@ ALTER TABLE `clientes`
   ADD PRIMARY KEY (`clid`);
 
 --
+-- Indices de la tabla `delivery`
+--
+ALTER TABLE `delivery`
+  ADD PRIMARY KEY (`fvid`) USING BTREE,
+  ADD KEY `deliveryestado` (`deliveryestado`),
+  ADD KEY `empid` (`empid`);
+
+--
+-- Indices de la tabla `deliverytiposestados`
+--
+ALTER TABLE `deliverytiposestados`
+  ADD PRIMARY KEY (`deliverytipo`);
+
+--
 -- Indices de la tabla `detallescompras`
 --
 ALTER TABLE `detallescompras`
@@ -716,19 +840,6 @@ ALTER TABLE `empleados`
   ADD KEY `fk_roles` (`emprol`);
 
 --
--- Indices de la tabla `empresas`
---
-ALTER TABLE `empresas`
-  ADD PRIMARY KEY (`emsid`);
-
---
--- Indices de la tabla `facturacompxobligaciones`
---
-ALTER TABLE `facturacompxobligaciones`
-  ADD KEY `idFacturaCompras` (`fcid`),
-  ADD KEY `idObligaciones` (`oblid`);
-
---
 -- Indices de la tabla `facturascompras`
 --
 ALTER TABLE `facturascompras`
@@ -742,7 +853,8 @@ ALTER TABLE `facturascompras`
 ALTER TABLE `facturasventas`
   ADD PRIMARY KEY (`fvid`),
   ADD KEY `idUsuario` (`clid`),
-  ADD KEY `fk_cajasventas` (`cjid`);
+  ADD KEY `fk_cajasventas` (`cjid`),
+  ADD KEY `fk_tipoventa` (`tipo`);
 
 --
 -- Indices de la tabla `movimientos`
@@ -751,13 +863,6 @@ ALTER TABLE `movimientos`
   ADD PRIMARY KEY (`movid`),
   ADD KEY `fk_cajasmov` (`cjid`),
   ADD KEY `movtipo` (`movtipo`);
-
---
--- Indices de la tabla `obligaciones`
---
-ALTER TABLE `obligaciones`
-  ADD PRIMARY KEY (`oblid`),
-  ADD KEY `fk_empresas` (`emsid`);
 
 --
 -- Indices de la tabla `productos`
@@ -792,10 +897,22 @@ ALTER TABLE `tipocaja`
   ADD PRIMARY KEY (`tipocajaid`);
 
 --
+-- Indices de la tabla `tipomesa`
+--
+ALTER TABLE `tipomesa`
+  ADD PRIMARY KEY (`mesaid`);
+
+--
 -- Indices de la tabla `tipomovimiento`
 --
 ALTER TABLE `tipomovimiento`
   ADD PRIMARY KEY (`movtipo`);
+
+--
+-- Indices de la tabla `tipoventa`
+--
+ALTER TABLE `tipoventa`
+  ADD PRIMARY KEY (`ventaid`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -805,79 +922,67 @@ ALTER TABLE `tipomovimiento`
 -- AUTO_INCREMENT de la tabla `cajas`
 --
 ALTER TABLE `cajas`
-  MODIFY `cjid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `cjid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `caid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `caid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `clid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `clid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `detallescompras`
 --
 ALTER TABLE `detallescompras`
-  MODIFY `dcorden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `dcorden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `empid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
-
---
--- AUTO_INCREMENT de la tabla `empresas`
---
-ALTER TABLE `empresas`
-  MODIFY `emsid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `empid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de la tabla `facturascompras`
 --
 ALTER TABLE `facturascompras`
-  MODIFY `fcid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `fcid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `facturasventas`
 --
 ALTER TABLE `facturasventas`
-  MODIFY `fvid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `fvid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT de la tabla `movimientos`
 --
 ALTER TABLE `movimientos`
-  MODIFY `movid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
-
---
--- AUTO_INCREMENT de la tabla `obligaciones`
---
-ALTER TABLE `obligaciones`
-  MODIFY `oblid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `movid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `proid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `proid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  MODIFY `provid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `provid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `rolid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `rolid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restricciones para tablas volcadas
@@ -889,6 +994,14 @@ ALTER TABLE `roles`
 ALTER TABLE `cajas`
   ADD CONSTRAINT `cajas_ibfk_1` FOREIGN KEY (`empid`) REFERENCES `empleados` (`empid`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `cajas_ibfk_2` FOREIGN KEY (`cjcierre`) REFERENCES `tipocaja` (`tipocajaid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `delivery`
+--
+ALTER TABLE `delivery`
+  ADD CONSTRAINT `delivery_ibfk_1` FOREIGN KEY (`deliveryestado`) REFERENCES `deliverytiposestados` (`deliverytipo`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `delivery_ibfk_2` FOREIGN KEY (`empid`) REFERENCES `empleados` (`empid`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `delivery_ibfk_3` FOREIGN KEY (`fvid`) REFERENCES `facturasventas` (`fvid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `detallescompras`
@@ -911,13 +1024,6 @@ ALTER TABLE `empleados`
   ADD CONSTRAINT `fk_roles` FOREIGN KEY (`emprol`) REFERENCES `roles` (`rolid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `facturacompxobligaciones`
---
-ALTER TABLE `facturacompxobligaciones`
-  ADD CONSTRAINT `facturacompXobligaciones_ibfk_1` FOREIGN KEY (`fcid`) REFERENCES `facturascompras` (`fcid`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `facturacompXobligaciones_ibfk_2` FOREIGN KEY (`oblid`) REFERENCES `obligaciones` (`oblid`) ON DELETE CASCADE ON UPDATE NO ACTION;
-
---
 -- Filtros para la tabla `facturascompras`
 --
 ALTER TABLE `facturascompras`
@@ -929,7 +1035,8 @@ ALTER TABLE `facturascompras`
 --
 ALTER TABLE `facturasventas`
   ADD CONSTRAINT `facturasVentas_ibfk_1` FOREIGN KEY (`clid`) REFERENCES `clientes` (`clid`),
-  ADD CONSTRAINT `fk_cajasventas` FOREIGN KEY (`cjid`) REFERENCES `cajas` (`cjid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_cajasventas` FOREIGN KEY (`cjid`) REFERENCES `cajas` (`cjid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tipoventa` FOREIGN KEY (`tipo`) REFERENCES `tipoventa` (`ventaid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `movimientos`
@@ -937,12 +1044,6 @@ ALTER TABLE `facturasventas`
 ALTER TABLE `movimientos`
   ADD CONSTRAINT `fk_cajasmov` FOREIGN KEY (`cjid`) REFERENCES `cajas` (`cjid`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `movimientos_ibfk_1` FOREIGN KEY (`movtipo`) REFERENCES `tipomovimiento` (`movtipo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `obligaciones`
---
-ALTER TABLE `obligaciones`
-  ADD CONSTRAINT `fk_empresas` FOREIGN KEY (`emsid`) REFERENCES `empresas` (`emsid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `productos`

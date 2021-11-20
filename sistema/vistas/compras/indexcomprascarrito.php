@@ -28,124 +28,132 @@ include ("../../procesos/check/check.php");
 <body>
 
 <div id="content">
-    <div class="container container-xl">
-        <div>
-            <div class="d-flex bd-highlight" style="margin-top: 100px">
-            
-                <div class="tab-content" id="myTabContent">
-                    <p id="mensaje">AVISO: ELIJA EL PROVEEDOR PARA SELECCIONAR PRODUCTOS</p>
-                    <p id="mensaje2">SI DESEA ELEGIR OTRO PROVEEDOR HAGA CLICK EN EL BOTON "CAMBIAR PROVEEDOR"<BR>(NOTA: SE BORRAN TODOS LOS PRODUCTOS DE LA LISTA DE COMPRAS)</p>
-                    <div class="d-flex justify-content-prepend">
-                        <button class="btn btn-info" id="btnCambiarProveedor" style="margin-bottom: 10px">CAMBIAR PROVEEDOR</button>
-                    </div>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
-                                type="button" role="tab" aria-controls="profile" aria-selected="false">PROVEEDORES</button>
-                        </li>
-                        <li class="nav-item" role="presentation" id="productito">
-                            <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
-                                type="button" role="tab" aria-controls="home" aria-selected="true">PRODUCTOS</button>
-                        </li>
-                    </ul>
-                    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="p-2 flex-grow-1 bd-highlight">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="table-responsive">
-                                        <table id="tablaProveedores" class="table table-striped" style="width:100%">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card">
+            <div class="card-header">
+                <h4>Pedido a Proveedores</h4>
+            </div>
+        <div class="card-body">
+                
+            <div class="container container-xl">
+                <div>
+                    <div class="d-flex bd-highlight" style="margin-top: 20px">
+                    
+                        <div class="tab-content" id="myTabContent">
+                            <p id="mensaje">AVISO: ELIJA EL PROVEEDOR PARA SELECCIONAR PRODUCTOS</p>
+                            <p id="mensaje2">SI DESEA ELEGIR OTRO PROVEEDOR HAGA CLICK EN EL BOTON "CAMBIAR PROVEEDOR"<BR>(NOTA: SE BORRAN TODOS LOS PRODUCTOS DE LA LISTA DE COMPRAS)</p>
+                            <div class="d-flex justify-content-prepend">
+                                <button class="btn btn-info" id="btnCambiarProveedor" style="margin-bottom: 10px">CAMBIAR PROVEEDOR</button>
+                            </div>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                                        type="button" role="tab" aria-controls="profile" aria-selected="false">PROVEEDORES</button>
+                                </li>
+                                <li class="nav-item" role="presentation" id="productito">
+                                    <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                                        type="button" role="tab" aria-controls="home" aria-selected="true">PRODUCTOS</button>
+                                </li>
+                            </ul>
+                            <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="p-2 flex-grow-1 bd-highlight">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="table-responsive">
+                                                <table id="tablaProveedores" class="table table-striped" style="width:100%">
 
-                                            <thead class="thead-dark">
-                                                <tr>
-                                                    <th>Id</th>
-                                                    <th>Nombre</th>
-                                                    <th>Email</th>
-                                                    <th>Direccion</th>
-                                                    <th>Telefono</th>
-                                                    <th>Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="table-light"></tbody>
-                                        </table>
+                                                    <thead class="thead-dark">
+                                                        <tr>
+                                                            <th>Id</th>
+                                                            <th>Nombre</th>
+                                                            <th>Email</th>
+                                                            <th>Direccion</th>
+                                                            <th>Telefono</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="table-light"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="p-2 flex-grow-1 bd-highlight">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="table-responsive">
+                                                <table id="tablaProductosProv"
+                                                    class="table table-striped" style="width:100%">
+
+                                                    <thead class="thead-dark">
+                                                        <tr>
+                                                            <th>Id</th>
+                                                            <th>Codigo</th>
+                                                            <th>Nombre</th>
+                                                            <th>Categoria</th>
+                                                            <th>Stock</th>
+                                                            <th>Precio</th>
+                                                            <th style="width: 48px;">Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="table-light"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="p-2 flex-grow-1 bd-highlight">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="table-responsive">
-                                        <table id="tablaProductosProv"
-                                            class="table table-striped" style="width:100%">
 
-                                            <thead class="thead-dark">
-                                                <tr>
-                                                    <th>Id</th>
-                                                    <th>Codigo</th>
-                                                    <th>Nombre</th>
-                                                    <th>Categoria</th>
-                                                    <th>Stock</th>
-                                                    <th>Precio</th>
-                                                    <th style="width: 48px;">Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="table-light"></tbody>
-                                        </table>
-                                    </div>
+
+                        <div class="flex-grow-1 bd-highlight" style="margin-left: 10px">
+                        <div class="row">
+                            <div class="proveedorDiv col-6">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">PROVEEDOR:</span>
                                 </div>
+                                <label id="tablaProveedorProv" class="form-control">S/P</label>
+                            </div>
+                            <div class="totalt col-6">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">TOTAL:</span>
+                                </div>
+                                <label id="total" class="form-control">0</label>
                             </div>
                         </div>
-                    </div>
-                </div>
 
 
-                <div class="flex-grow-1 bd-highlight" style="margin-left: 10px">
-                <div class="row">
-                    <div class="proveedorDiv col-6">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">PROVEEDOR:</span>
+                            <table class="table table-striped">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Precio</th>
+                                        <th>Cantidad</th>
+                                        <th>Numero</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaProductosComp" class="table-light">
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-success" id="btnFinalizarComp">Continuar</button>
+                            </div>
                         </div>
-                        <label id="tablaProveedorProv" class="form-control">S/P</label>
-                    </div>
-                    <div class="totalt col-6">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">TOTAL:</span>
-                        </div>
-                        <label id="total" class="form-control">0</label>
-                    </div>
-                </div>
-
-
-                    <table class="table table-striped">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Precio</th>
-                                <th>Cantidad</th>
-                                <th>Numero</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tablaProductosComp" class="table-light">
-                        </tbody>
-                    </table>
-                    <div class="d-flex justify-content-end">
-                        <button class="btn btn-success" id="btnFinalizarComp">Continuar</button>
                     </div>
                 </div>
             </div>
-        
-        </div>
-    </div>
-    <div class="mensajeCajaCerrada">
+            <div class="mensajeCajaCerrada">
         <div class="card card-body">
                 <div class="form-group">
                     <h6>LA CAJA DE HOY SE ENCUENTRA CERRADA</h6>
                 </div>
         </div>
     </div>
+        </div>
+</div>
 </div>
         <div id="backModal">
             <div class="drower">

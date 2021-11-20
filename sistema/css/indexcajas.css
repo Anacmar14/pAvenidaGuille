@@ -2,7 +2,7 @@ a {
     text-decoration: none;
 }
 
-.container, .mensajeCajaCerrada, #opcionAdministrador {
+.saludos, .mensajeCajaCerrada, #opcionAdministrador, #antesDeMensaje {
     display: none;
 }
 
@@ -63,7 +63,7 @@ a {
     position: absolute;
     top: 0;
     background: rgba(75, 75, 75, 0.452);
-    height: 100%;
+    height: 135%;
     width: 100%;
     z-index: 99998;
     align-items: center;
@@ -84,7 +84,10 @@ a {
 #CajaCerrada{
     position: absolute;
     padding: 400px;
-    padding-left: 1000px;
+    top:0px;
+    padding-left: 700px;
+    padding-right: 668px;
+    padding-bottom: 635px;
     background: rgba(75, 75, 75, 0.452);
     z-index: 99999;
     display: none;
@@ -109,4 +112,3 @@ a {
 #cerrarCaja, #subirCaja {
     width: 50px;
 }
-

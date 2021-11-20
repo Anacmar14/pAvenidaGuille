@@ -11,17 +11,21 @@ $(document).ready(function () {
       },
       success: function (data) {
       result = JSON.parse(data);
-      if (result.length != 0) {
-          entrar = result[0].cjcierre;
-      }
-        if (entrar == 0) {
-          $(".container").css('display', 'block');
+        if (result.length != 0) {
+            entrar = result[0].cjcierre;
+          if (entrar == 0) {
+            $(".container").css('display', 'block');
+          }
+          else if (entrar == 1){  
+            $(".container").css('display', 'none');
+            $(".mensajeCajaCerrada").css('display', 'flex');
+          }  
         }
-        else if (entrar == 1){  
+        else {
           $(".container").css('display', 'none');
           $(".mensajeCajaCerrada").css('display', 'flex');
-        }  
         }
+      }
       })
   var total = 0;
   var id, opcion;
@@ -272,6 +276,8 @@ $(document).ready(function () {
           { data: "fvfechahora" },
           { data: "clnom" },
           { data: "fvtotal" },
+          { data: "ventadesc" },
+          { data: "empnom" },
           { defaultContent:
               "<div class='dt-buttons btn-group style='flex-wrap: nowrap' '><button class='btn btn-secondary btn-sm btnEditarVenta' title='Editar Venta'><i class='material-icons'>edit</i></button><button class='btn btn-primary btn-sm btnVerMasDetalleVenta' title='Ver Mas'><i class='material-icons'>remove_red_eye</i></button><div class='oc'><button class='btn btn-danger btn-sm btnOcultarVenta' title='Anular Venta'><i class='material-icons'>block</i></button></div><button class='btn btn-success btn-sm btnConfirmarVenta' title='Confirmar Venta'><i class='material-icons'>check</i></button></div>",
           },
@@ -371,6 +377,12 @@ $(document).ready(function () {
                       data: { opcion: opcion,
                         folio: folio
                       },
+                      success: function (data) {
+                        $('#tablaHistorialVentas').DataTable().destroy();
+                        $('#tablaListaVentas').DataTable().destroy();
+                        reloadTablaHistorial();
+                        reloadTablaLista();
+                      }
                     }) 
                 }
               }) 
@@ -394,6 +406,7 @@ $(document).ready(function () {
         success: function (data) {
           console.log('aquitoy')
           $('#tablaHistorialVentas').DataTable().destroy();
+          $('#tablaListaVentas').DataTable().destroy();
           reloadTablaHistorial();
           reloadTablaLista();
         }
@@ -681,6 +694,20 @@ $(document).ready(function () {
           facturaGenerica = resultFactura[0].factura;
           facturaGenerica++;
           $("#facturaModal").html("<div class='totalt col-6'><div class='input-group-prepend'><span class='input-group-text'>FACTURA:</span></div><label id='facturaModalLabel' class='form-control'>"+facturaGenerica+"</label></div>");
+        }
+      });
+      opcion=10;
+      $.ajax({
+        url: "../../procesos/cajas/consCaja.php",
+        type: "POST",
+        datatype: "JSON",
+        data: {
+          opcion:opcion,
+        },
+        success: function (data) {
+          resultcaja = JSON.parse(data);
+          cajactual = resultcaja[0].cajahoy;
+          $("#cajaDelDia").html("<div class='d-flex justify-content-end p-3'><div class='totalDivCol'><div class='input-group-prepend'><span class='input-group-text'>CAJA:</span></div><label id='cajaDelDiaModalLabel' class='form-control'>"+cajactual+"</label></div></div>");
         }
       });
       $("#fechaDelDiaModal").html("<div class='d-flex justify-content-end p-2'><div class='input-group-prepend'><span class='input-group-text' id='fechaDelDiaModalSpan'>"+fechadeldia+"</span></div></div>");

@@ -111,7 +111,7 @@ a[data-toggle="collapse"] {
   min-height: 100vh;
   transition: all 0.3s;
   margin-top: 70px;
-  background: grey;}
+  background: #D3D3D3;}
 @media (max-width:800px) {
   #sidebar {
     margin-left: -250px;}

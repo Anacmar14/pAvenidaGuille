@@ -23,7 +23,7 @@ switch($opcion){
         break;    
 
     case 4: // select de historial de ventas
-        $consulta = "SELECT fcid, cjid, fcfechahora, provnom, fctotal FROM facturascompras INNER JOIN proveedores ON facturascompras.provid = proveedores.provid AND is_delete = 0";
+        $consulta = "SELECT fcid, cjid, fcfechahora, provnom, fctotal FROM facturascompras INNER JOIN proveedores ON facturascompras.provid = proveedores.provid AND is_delete = 0 AND is_check = 0";
         $resultado= mysqli_query($conn, $consulta);     
         $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
         break;
