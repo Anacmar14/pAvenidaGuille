@@ -13,7 +13,7 @@ $(document).ready(function () {
             window.location.href = '../../graficas/indexventas.php?fechas='+objeto+'';
         }
         else if (opcion == 2) {
-            window.location.href = '../../graficas/indexproductos.php?fechas='+objeto+'';
+            window.location.href = '../../graficas/indexdelivery.php?fechas='+objeto+'';
         } else {
             window.location.href = '../../graficas/indexingresosegresos.php?fechas='+objeto+'';
         }

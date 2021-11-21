@@ -83,7 +83,8 @@ $(document).ready(function () {
     deliveryid = $("#idDelivery").val();
     deliverydireccion = $("#deliveryDireccion").val();
     fvid = $("#deliveryFactura").val();
-    opcion = 1;
+
+    opcion = 0;
     $.ajax({
         url:"../../procesos/delivery/consDelivery.php",
         type:"POST",
@@ -91,12 +92,34 @@ $(document).ready(function () {
         data: {
           opcion: opcion,
           fvid: fvid,
-          deliveryid: deliveryid,
-          deliverydireccion: deliverydireccion,
         },
         success: function (data) {
-          tablaDelivery();
-        }
+          result = JSON.parse(data)
+          tipo = result[0].tipo
+          if (tipo == 0) {
+            opcion = 1;
+            $.ajax({
+                url:"../../procesos/delivery/consDelivery.php",
+                type:"POST",
+                datatype:"JSON",
+                data: {
+                  opcion: opcion,
+                  fvid: fvid,
+                  deliveryid: deliveryid,
+                  deliverydireccion: deliverydireccion,
+                },
+                success: function (data) {
+                  tablaDelivery();
+                },
+            })
+          }
+          else if (tipo == 1) {
+            alert('Ya se asigno esta venta a una mesa')
+          }
+          else {
+            alert('Ya se asigno esta venta a un delivery')
+          }
+        },
     })
 
     $("#idDelivery").val('');
@@ -133,22 +156,42 @@ $(document).ready(function () {
     factura = $("#numeroDeFactura").val();
     estadoactual = $("#deliveryEstadoActual").val();
     estadonuevo = $("#deliveryEstadoNuevo").val();
+    console.log(estadonuevo)
+    if (estadonuevo != 4){
     opcion = 4
-    $.ajax({
-      url:"../../procesos/delivery/consDelivery.php",
-      type:"POST",
-      datatype:"JSON",
-      data: {
-        opcion: opcion,
-        fvid: factura,
-        estado: estadonuevo,
-      },
-      success: function (data) {
-        $("#DeliveryModal").css('display', 'none');
-        $("#deliveryEstadoNuevo").val('');
-        tablaDelivery();
-      }
-  })
+      $.ajax({
+        url:"../../procesos/delivery/consDelivery.php",
+        type:"POST",
+        datatype:"JSON",
+        data: {
+          opcion: opcion,
+          fvid: factura,
+          estado: estadonuevo,
+        },
+        success: function (data) {
+          $("#DeliveryModal").css('display', 'none');
+          $("#deliveryEstadoNuevo").val('');
+          tablaDelivery();
+        }
+      })
+    }
+    else {
+      opcion = 6
+      $.ajax({
+        url:"../../procesos/delivery/consDelivery.php",
+        type:"POST",
+        datatype:"JSON",
+        data: {
+          opcion: opcion,
+          fvid: factura,
+        },
+        success: function (data) {
+          $("#DeliveryModal").css('display', 'none');
+          $("#deliveryEstadoNuevo").val('');
+          tablaDelivery();
+        }
+      })
+    } 
   })
 
   $(document).on("click", "#cerrarDelivery", function () {

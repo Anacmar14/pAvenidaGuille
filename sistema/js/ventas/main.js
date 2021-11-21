@@ -49,7 +49,8 @@ $(document).ready(function () {
   var fechadeldia = fechadeldia.toLocaleDateString("es-ES");
   var stock = 0;
   reloadTablaHistorial();
-  reloadTablaLista();
+  reloadTablaListaDelivery();
+  reloadTablaListaVentas();
   opcion = 4;
   tablaProductos = $("#tablaProductos").DataTable({
       lengthMenu: [[5], [5]],
@@ -209,9 +210,85 @@ $(document).ready(function () {
       });
     }
 
-    function reloadTablaLista() {
-      opcion = 4;
+
+    function reloadTablaListaVentas() {
+      opcion = 0;
       tablaHistorialVentas = $("#tablaListaVentas").DataTable({
+        lengthMenu: [[6], [6]],
+        language: {
+          "decimal": "",
+          "emptyTable": "No hay información",
+          "info": "Mostrando _START_ a _END_ de _TOTAL_ Ventas",
+          "infoEmpty": "Mostrando 0 to 0 of 0 Ventas",
+          "infoFiltered": "(Filtrado de _MAX_ total Venta)",
+          "infoPostFix": "",
+          "thousands": ",",
+          "lengthMenu": "Mostrar _MENU_ Ventas",
+          "loadingRecords": "Cargando...",
+          "processing": "Procesando...",
+          "search": "Buscar:",
+          "zeroRecords": "Sin resultados encontrados",
+          "paginate": {
+              "first": "Primero",
+              "last": "Ultimo",
+              "next": "Siguiente",
+              "previous": "Anterior"
+          }
+        },
+        responsive: "true",
+          dom: 'Bfrtilp',       
+          buttons:[ 
+          {
+            extend:    'excelHtml5',
+            text:      '<i class="fas fa-file-excel"></i> ',
+            titleAttr: 'Exportar a Excel',
+            className: 'btn btn-success',
+            exportOptions: {
+                columns: [ 0, 1, 2, 3]
+            },
+          },
+          {
+            extend:    'pdfHtml5',
+            text:      '<i class="fas fa-file-pdf"></i> ',
+            titleAttr: 'Exportar a PDF',
+            className: 'btn btn-danger',
+            exportOptions: {
+                columns: [ 0, 1, 2, 3]
+            },
+          },
+          {
+            extend:    'print',
+            text:      '<i class="fa fa-print"></i> ',
+            titleAttr: 'Imprimir',
+            className: 'btn btn-info',
+            exportOptions: {
+                columns: [ 0, 1, 2, 3]
+            },
+          },
+        ],
+        ajax: {
+          url: "../../procesos/ventas/consVentas.php",
+          method: "POST", //usamos el metodo POST
+          data: { opcion: opcion }, //enviamos opcion 4 para que haga un SELECT
+          dataSrc: "",
+        },
+        columns: [
+          { data: "fvid" },
+          { data: "cjid"},
+          { data: "fvfechahora" },
+          { data: "clnom" },
+          { data: "fvtotal" },
+          { defaultContent:
+              "<div class='dt-buttons btn-group style='flex-wrap: nowrap' '><button class='btn btn-secondary btn-sm btnAgregarDelivery' title='Agregar a Delivery'><i class='material-icons'>add</i></button><button class='btn btn-primary btn-sm btnVerMasDetalleVenta' title='Ver Mas'><i class='material-icons'>remove_red_eye</i></button><div class='oc'><button class='btn btn-danger btn-sm btnOcultarVenta' title='Anular Venta'><i class='material-icons'>block</i></button></div><button class='btn btn-success btn-sm btnConfirmarVenta' title='Confirmar Venta'><i class='material-icons'>check</i></button></div>",
+          },
+
+        ],
+      });
+    }
+
+    function reloadTablaListaDelivery() {
+      opcion = 4;
+      tablaHistorialVentas = $("#tablaListaVentasDelivery").DataTable({
         lengthMenu: [[6], [6]],
         language: {
           "decimal": "",
@@ -278,59 +355,14 @@ $(document).ready(function () {
           { data: "fvtotal" },
           { data: "ventadesc" },
           { data: "empnom" },
+          { data: "deliverydescripcion" },
           { defaultContent:
-              "<div class='dt-buttons btn-group style='flex-wrap: nowrap' '><button class='btn btn-secondary btn-sm btnEditarVenta' title='Editar Venta'><i class='material-icons'>edit</i></button><button class='btn btn-primary btn-sm btnVerMasDetalleVenta' title='Ver Mas'><i class='material-icons'>remove_red_eye</i></button><div class='oc'><button class='btn btn-danger btn-sm btnOcultarVenta' title='Anular Venta'><i class='material-icons'>block</i></button></div><button class='btn btn-success btn-sm btnConfirmarVenta' title='Confirmar Venta'><i class='material-icons'>check</i></button></div>",
+              "<div class='dt-buttons btn-group style='flex-wrap: nowrap' '><button class='btn btn-primary btn-sm btnVerMasDetalleVenta' title='Ver Mas'><i class='material-icons'>remove_red_eye</i></button><div class='oc'><button class='btn btn-danger btn-sm btnOcultarVenta' title='Anular Venta'><i class='material-icons'>block</i></button></div><button class='btn btn-success btn-sm btnConfirmarVenta' title='Confirmar Venta'><i class='material-icons'>check</i></button></div>",
           },
 
         ],
       });
     }
-
-    $.ajax({
-      url: "../../procesos/ventas/consUsuario.php",
-      type: "POST",
-      datatype: "JSON",
-      data: {},
-      success: function (data) {
-        result = JSON.parse(data);
-        if (result == 1){
-          $('#tablaHistorialVentas').DataTable().destroy();
-          $('#tablaHistorialVentas').DataTable( {
-              "pagingType": "full_numbers",
-              "columnDefs": [
-                  {
-                      "targets": [ 1 ],
-                      "visible": false,
-                      "searchable": false
-                  },
-              ]
-          } );
-        }
-      }
-    }); 
-
-    $.ajax({
-      url: "../../procesos/ventas/consUsuario.php",
-      type: "POST",
-      datatype: "JSON",
-      data: {},
-      success: function (data) {
-        result = JSON.parse(data);
-        if (result == 1){
-          $('#tablaListaVentas').DataTable().destroy();
-          $('#tablaListaVentas').DataTable( {
-              "pagingType": "full_numbers",
-              "columnDefs": [
-                  {
-                      "targets": [ 1 ],
-                      "visible": false,
-                      "searchable": false
-                  },
-              ]
-          } );
-        }
-      }
-    }); 
 
 
   $(document).on("click", ".btnConfirmarVenta", function () {
@@ -379,9 +411,11 @@ $(document).ready(function () {
                       },
                       success: function (data) {
                         $('#tablaHistorialVentas').DataTable().destroy();
+                        $('#tablaListaVentasDelivery').DataTable().destroy();
                         $('#tablaListaVentas').DataTable().destroy();
                         reloadTablaHistorial();
-                        reloadTablaLista();
+                        reloadTablaListaDelivery();
+                        reloadTablaListaVentas();
                       }
                     }) 
                 }
@@ -406,9 +440,11 @@ $(document).ready(function () {
         success: function (data) {
           console.log('aquitoy')
           $('#tablaHistorialVentas').DataTable().destroy();
+          $('#tablaListaVentasDelivery').DataTable().destroy();
           $('#tablaListaVentas').DataTable().destroy();
           reloadTablaHistorial();
-          reloadTablaLista();
+          reloadTablaListaDelivery();
+          reloadTablaListaVentas();
         }
       }) 
     })
@@ -831,5 +867,13 @@ $(document).ready(function () {
       objeto = JSON.stringify(objeto);
       console.log(objeto);
       window.location.href = '../../graficas/ventas/index.php?fechas='+objeto+'';
+    });
+
+
+    $(document).on("click", ".btnAgregarDelivery", function () {
+      fila = $(this).closest("tr");
+      id = parseInt(fila.find("td:eq(0)").text());
+      folio = id;
+      window.location.href = '../../vistas/delivery/indexdelivery.php?factura='+folio+'';
     });
 });

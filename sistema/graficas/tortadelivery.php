@@ -1,11 +1,11 @@
 <?php
 	require_once "php/conexion.php";
 	$conexion=conexion();
-	// $fechas= $_GET['fechas'];
-	// $fechas = json_decode($fechas,true);
-	// $desde= $fechas['desde'];
-	// $hasta= $fechas['hasta'];
-	$sql="SELECT pronombre as nombre, prostockactual as total from productos ORDER BY prostockactual ASC LIMIT 3";
+	$fechas= $_GET['fechas'];
+	$fechas = json_decode($fechas,true);
+	$desde= $fechas['desde'];
+	$hasta= $fechas['hasta'];
+	$sql="SELECT created_at as fecha, COUNT(empid) as empleados FROM delivery WHERE created_at BETWEEN '$desde' AND '$hasta' GROUP BY month(created_at)";
 	$result=mysqli_query($conexion,$sql);
 	$valoresY=array();//montos
 	$valoresX=array();//fechas
@@ -46,7 +46,7 @@
 	}];
 
 	var layout = {
-		title: 'LOS TRES ULTIMOS PRODUCTOS CON EL STOCK MINIMO'
+		title: 'ENTREGAS DE DELIVERY POR MES'
 	};
 
 	var config = {

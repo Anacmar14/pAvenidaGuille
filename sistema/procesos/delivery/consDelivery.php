@@ -8,9 +8,16 @@ $deliverydireccion = (isset($_POST['deliverydireccion'])) ? $_POST['deliverydire
 $estado = (isset($_POST['estado'])) ? $_POST['estado'] : '';
 
 switch($opcion){
+    case 0:
+        $consulta = "SELECT tipo FROM facturasventas WHERE fvid = '$fvid' AND is_delete = 0 AND is_check = 0";
+        $resultado= mysqli_query($conn, $consulta);
+        $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+        break;
     case 1:
         $consulta = "INSERT INTO delivery(deliverydireccion, fvid, empid, deliveryestado) VALUES ('$deliverydireccion','$fvid','$empid',1)";
-        $resultado= mysqli_query($conn, $consulta);     
+        $resultado= mysqli_query($conn, $consulta);
+        $consulta = "UPDATE facturasventas SET tipo = 2, empid = '$empid' WHERE fvid = '$fvid'";
+        $resultado= mysqli_query($conn, $consulta);
         break;
     case 2:
         $consulta = "SELECT fvid,deliverydireccion,empnom, deliverydescripcion, created_at, TIMESTAMPDIFF(minute, created_at, updated_at)AS Minutos, updated_at FROM delivery, empleados, deliverytiposestados WHERE delivery.empid = empleados.empid AND deliveryestado = deliverytipo";
@@ -30,7 +37,16 @@ switch($opcion){
     case 5:
         $consulta = "DELETE FROM delivery WHERE fvid = '$fvid'";
         $resultado= mysqli_query($conn, $consulta);     
-        $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+
+        $consulta = "UPDATE facturasventas SET tipo = 0, empid = 0 WHERE fvid = '$fvid'";
+        $resultado= mysqli_query($conn, $consulta);
+        break;
+    case 6:
+        $consulta = "DELETE FROM delivery WHERE fvid = '$fvid'";
+        $resultado= mysqli_query($conn, $consulta);     
+
+        $consulta = "UPDATE facturasventas SET is_check = 1 WHERE fvid = '$fvid'";
+        $resultado= mysqli_query($conn, $consulta);
         break;
 }
 

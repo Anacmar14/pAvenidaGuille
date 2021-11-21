@@ -7,6 +7,12 @@ $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
 $cjid = (isset($_POST['cjid'])) ? $_POST['cjid'] : '';
 
 switch($opcion){
+    case 0: // select de historial de ventas sin asignar
+        $consulta = "SELECT fvid, cjid, fvfechahora, clnom, fvtotal, ventadesc, empnom FROM facturasventas INNER JOIN clientes ON facturasventas.clid = clientes.clid AND is_delete = 0 AND is_check = 0 AND tipo = 0 INNER JOIN tipoventa ON tipo = ventaid INNER JOIN empleados ON facturasventas.empid = empleados.empid";
+        $resultado= mysqli_query($conn, $consulta);     
+        $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+        break;
+
     case 1: // cambia la anulacion de venta
         $consulta = "UPDATE facturasventas SET is_delete = 1 WHERE fvid = '$folio'";
         $resultado= mysqli_query($conn, $consulta);     
@@ -23,8 +29,8 @@ switch($opcion){
         $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
         break;    
 
-    case 4: // select de historial de ventas
-        $consulta = "SELECT fvid, cjid, fvfechahora, clnom, fvtotal, ventadesc, empnom FROM facturasventas INNER JOIN clientes ON facturasventas.clid = clientes.clid AND is_delete = 0 AND is_check = 0 INNER JOIN tipoventa ON tipo = ventaid INNER JOIN empleados ON facturasventas.empid = empleados.empid";
+    case 4: // select de historial de ventas con delivery
+        $consulta = "SELECT facturasventas.fvid, cjid, fvfechahora, clnom, fvtotal, ventadesc, empnom, deliverydescripcion FROM facturasventas INNER JOIN clientes ON facturasventas.clid = clientes.clid AND is_delete = 0 AND is_check = 0 INNER JOIN tipoventa ON tipo = ventaid INNER JOIN empleados ON facturasventas.empid = empleados.empid INNER JOIN delivery ON delivery.fvid = facturasventas.fvid INNER JOIN deliverytiposestados ON delivery.deliveryestado = deliverytiposestados.deliverytipo";
         $resultado= mysqli_query($conn, $consulta);     
         $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
         break;

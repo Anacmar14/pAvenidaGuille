@@ -41,7 +41,7 @@ include ("../../procesos/check/check.php");
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Folio</th>
-                                    <th class="oc">Caja</th>
+                                    <th>Caja</th>
                                     <th>Fecha</th>
                                     <th>Cliente</th>
                                     <th>Total</th>

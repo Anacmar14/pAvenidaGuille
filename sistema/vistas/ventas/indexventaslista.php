@@ -34,33 +34,80 @@ include ("../../procesos/check/check.php");
                     <h4>Transacción de Ventas</h4>
                 </div>
                 <div class="card-body">
-                    <div class="container container-xl">
-                        <BR>
-                        <div class="table-responsive">
-                            <table id="tablaListaVentas" class="table table-striped" style="width:100%">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>Folio</th>
-                                        <th class="oc">Caja</th>
-                                        <th>Fecha</th>
-                                        <th>Cliente</th>
-                                        <th>Total</th>
-                                        <th>Tipo</th>
-                                        <th>Empleado</th>
-                                        <th style="width: 48px;">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-light"></tbody>
-                            </table>
+
+                        <div class="container tab-content" id="myTabContent">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                        data-bs-target="#home" type="button" role="tab" aria-controls="home"
+                                        aria-selected="true">SIN ASIGNAR</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                        data-bs-target="#profile" type="button" role="tab"
+                                        aria-controls="profile" aria-selected="false">DELIVERY</button>
+                                </li>
+                            </ul>
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="p-2 flex-grow-1 bd-highlight">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="table-responsive">
+                                                <table id="tablaListaVentas" class="table table-striped" style="width:100%">
+
+                                                    <thead class="thead-dark">
+                                                        <tr>
+                                                            <th>Folio</th>
+                                                            <th>Caja</th>
+                                                            <th>Fecha</th>
+                                                            <th>Cliente</th>
+                                                            <th>Total</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="table-light"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="p-2 flex-grow-1 bd-highlight">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="table-responsive">
+                                                <table id="tablaListaVentasDelivery" class="table table-striped" style="width:100%">
+
+                                                    <thead class="thead-dark">
+                                                        <tr>
+                                                            <th>Folio</th>
+                                                            <th>Caja</th>
+                                                            <th>Fecha</th>
+                                                            <th>Cliente</th>
+                                                            <th>Total</th>
+                                                            <th>Tipo</th>
+                                                            <th>Empleado</th>
+                                                            <th>Estado</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="table-light"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                         <div class="mensajeCajaCerrada">
-                        <div class="card card-body">
-                            <div class="form-group">
-                                <h6>LA CAJA DE HOY SE ENCUENTRA CERRADA</h6>
+                            <div class="card card-body">
+                                <div class="form-group">
+                                    <h6>LA CAJA DE HOY SE ENCUENTRA CERRADA</h6>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -108,6 +155,11 @@ include ("../../procesos/check/check.php");
 
 
 </body>
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+    </script>
 
 <!-- jQuery, Popper.js, Bootstrap JS -->
 <script src="../../../sistema/jquery/jquery-3.3.1.min.js"></script>

@@ -32,7 +32,7 @@ include ("../../procesos/check/check.php");
                   <label>Gráficos:</label>
                   <select name="tipoGrafico" id="tipoGrafico" class="form-control">      
                     <option value="1">Total de ingresos de ventas por mes</option>
-                    <option value="2">Los tres ultimos productos con el stock minimo</option>
+                    <option value="2">Entregas de Delivery por mes</option>
                     <option value="3">Ingresos y Egresos de las cajas por mes</option>
                   </select>
               </div>
@@ -55,5 +55,8 @@ include ("../../procesos/check/check.php");
         <script src="../../../sistema/bootstrap/js/bootstrap.min.js"></script>
 
         <script type="text/javascript" src="../../graficas/main.js"></script>
+
+        <!-- Navegador costado -->
+        <script src="../../../sistema/js/script.js"></script>
   </div>
 </body>

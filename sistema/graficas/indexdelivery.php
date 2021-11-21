@@ -12,7 +12,7 @@
 			<div class="col-sm-12">
 				<div class="panel panel-primary">
 					<div class="panel panel-heading">
-						STOCK DE PRODUCTOS
+						Entregas de Delivery por mes
 					</div>
 					<button id='volverAtras' class="btn btn-danger" style='margin-left: 20px;'>Volver</button>
 					<div class="panel panel-body">
@@ -31,7 +31,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#cargaBarras').load('tortaproductos.php?fechas=<?php echo $_GET['fechas'] ?>');
+		$('#cargaBarras').load('tortadelivery.php?fechas=<?php echo $_GET['fechas'] ?>');
 
 		$(document).on("click", "#volverAtras", function () {
 			window.location.href = 'http://localhost/proyectofinal/sistema/vistas/reportes/indexreportes.php';
