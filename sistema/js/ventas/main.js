@@ -280,7 +280,7 @@ $(document).ready(function () {
           { data: "clnom" },
           { data: "fvtotal" },
           { defaultContent:
-              "<div class='dt-buttons btn-group style='flex-wrap: nowrap' '><button class='btn btn-info btn-sm btnAgregarMesa' title='Agregar a Mesa'><i class='material-icons'>add</i></button><button class='btn btn-secondary btn-sm btnAgregarDelivery' title='Agregar a Delivery'><i class='material-icons'>add</i></button><button class='btn btn-primary btn-sm btnVerMasDetalleVenta' title='Ver Mas'><i class='material-icons'>remove_red_eye</i></button><div class='oc'><button class='btn btn-danger btn-sm btnOcultarVenta' title='Anular Venta'><i class='material-icons'>block</i></button></div><button class='btn btn-success btn-sm btnConfirmarVenta' title='Confirmar Venta'><i class='material-icons'>check</i></button></div>",
+              "<div class='dt-buttons btn-group style='flex-wrap: nowrap' '><button class='btn btn-dark btn-sm btnAgregarMesa' title='Agregar a Mesa'><i class='material-icons'>table_restaurant</i></button><button class='btn btn-secondary btn-sm btnAgregarDelivery' title='Agregar a Delivery'><i class='material-icons'>two_wheeler</i></button><button class='btn btn-primary btn-sm btnVerMasDetalleVenta' title='Ver Mas'><i class='material-icons'>remove_red_eye</i></button><div class='oc'><button class='btn btn-danger btn-sm btnOcultarVenta' title='Anular Venta'><i class='material-icons'>block</i></button></div><button class='btn btn-success btn-sm btnConfirmarVenta' title='Confirmar Venta'><i class='material-icons'>check</i></button></div>",
           },
 
         ],

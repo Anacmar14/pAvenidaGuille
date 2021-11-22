@@ -119,7 +119,7 @@ include ("../../procesos/check/check.php");
                                                             <th>Cliente</th>
                                                             <th>Total</th>
                                                             <th>Tipo</th>
-                                                            <th>Numero</th>
+                                                            <th>Mesa</th>
                                                             <th>Empleado</th>
                                                             <th>Estado</th>
                                                             <th>Acciones</th>

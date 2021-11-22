@@ -25,7 +25,7 @@ include ("../../procesos/check/check.php");
                 <h4>Gestor de Delivery</h4>
             </div>
                 <div class="card card-body">
-                    <div class="container">
+                    <div class="abiertoCaja">
                         <div class="form-group">
                             <h6>Asignar pedido</h6>
                         </div>
@@ -83,8 +83,10 @@ include ("../../procesos/check/check.php");
                                                                 <th>Direccion</th>
                                                                 <th>Estado</th>
                                                                 <th>Creacion de Pedido</th>
-                                                                <th>Minutos</th>
+                                                                <th>Tiempo de Creacion</th>
+                                                                <th>Tiempo Entre Creacion y Modificacion</th>
                                                                 <th>Ultima Modificacion</th>
+                                                                <th>Tiempo Ultima Modificacion</th>
                                                                 <th>Acciones</th>
                                                             </tr>
                                                         </thead>
@@ -109,7 +111,6 @@ include ("../../procesos/check/check.php");
                                                                 <th>Direccion</th>
                                                                 <th>Estado</th>
                                                                 <th>Creacion de Pedido</th>
-                                                                <th>Minutos</th>
                                                                 <th>Ultima Modificacion</th>
                                                             </tr>
                                                         </thead>

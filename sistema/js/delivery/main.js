@@ -13,15 +13,15 @@ $(document).ready(function () {
         if (result.length != 0) {
             entrar = result[0].cjcierre;
           if (entrar == 0) {
-            $(".container").css('display', 'block');
+            $(".abiertoCaja").css('display', 'block');
           }
           else if (entrar == 1){
-            $(".container").css('display', 'none');
+            $(".abiertoCaja").css('display', 'none');
             $(".mensajeCajaCerrada").css('display', 'flex');
           }
         }
         else {
-            $(".container").css('display', 'none');
+            $(".abiertoCaja").css('display', 'none');
             $(".mensajeCajaCerrada").css('display', 'flex');
           }
         
@@ -69,8 +69,10 @@ $(document).ready(function () {
         { data: "deliverydireccion" },
         { data: "deliverydescripcion" },
         { data: "created_at" },
-        { data: "Minutos" },
+        { data: "MinutosReales" },
+        { data: "MinutosEntreCA" },
         { data: "updated_at" },
+        { data: "MinutosEntreAR" },
         { defaultContent:
           "<div class='text-center'><button class='btn btn-secondary btn-sm btnEditarPedido' title='Editar Pedido'><i class='material-icons'>edit</i></button><button class='btn btn-danger btn-sm btnEliminarPedido' title='Eliminar Pedido'><i class='material-icons'>delete_outline</i></button></div>",
       }
@@ -118,7 +120,6 @@ $(document).ready(function () {
         { data: "deliverydireccion" },
         { data: "deliverydescripcion" },
         { data: "created_at" },
-        { data: "Minutos" },
         { data: "updated_at" },
       ],
     });

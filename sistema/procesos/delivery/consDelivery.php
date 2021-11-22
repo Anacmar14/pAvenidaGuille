@@ -20,7 +20,7 @@ switch($opcion){
         $resultado= mysqli_query($conn, $consulta);
         break;
     case 2:
-        $consulta = "SELECT delivery.fvid,deliverydireccion,empnom, deliverydescripcion, created_at, TIMESTAMPDIFF(minute, created_at, updated_at)AS Minutos, updated_at FROM delivery, empleados, deliverytiposestados, facturasventas WHERE delivery.empid = empleados.empid AND deliveryestado = deliverytipo AND deliverytipo != 4 AND is_check = 0 AND is_delete = 0 AND delivery.fvid = facturasventas.fvid";
+        $consulta = "SELECT delivery.fvid,deliverydireccion,empnom, deliverydescripcion, created_at, CONCAT(MOD(TIMESTAMPDIFF(HOUR, created_at, CURRENT_TIME), 24), ':',MOD(TIMESTAMPDIFF(MINUTE, created_at, CURRENT_TIME), 60))AS MinutosReales, CONCAT(MOD(TIMESTAMPDIFF(HOUR, created_at, updated_at), 24), ':',MOD(TIMESTAMPDIFF(MINUTE, created_at, updated_at), 60))AS MinutosEntreCA, CONCAT(MOD(TIMESTAMPDIFF(HOUR, updated_at, CURRENT_TIME), 24), ':',MOD(TIMESTAMPDIFF(MINUTE, updated_at, CURRENT_TIME), 60))AS MinutosEntreAR, updated_at FROM delivery, empleados, deliverytiposestados, facturasventas WHERE delivery.empid = empleados.empid AND deliveryestado = deliverytipo AND deliverytipo != 4 AND is_check = 0 AND is_delete = 0 AND delivery.fvid = facturasventas.fvid";
         $resultado= mysqli_query($conn, $consulta);     
         $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
         break;
@@ -53,6 +53,7 @@ switch($opcion){
         $resultado= mysqli_query($conn, $consulta);     
         $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
         break;
+        
 }
 
 

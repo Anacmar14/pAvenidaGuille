@@ -14,8 +14,9 @@ switch($opcion){
         $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
         break;
     case 1:
-        $consulta = "INSERT INTO mesas(mesaid, fvid, empid, mesaestado) VALUES ('$mesaid','$fvid','$mozoid',2)";
+        $consulta = "UPDATE mesas SET fvid = '$fvid', empid = '$mozoid', mesaestado = 2 WHERE mesaid = '$mesaid'";
         $resultado= mysqli_query($conn, $consulta);
+
         $consulta = "UPDATE facturasventas SET tipo = 1, empid = '$mozoid' WHERE fvid = '$fvid'";
         $resultado= mysqli_query($conn, $consulta);
         break;
@@ -35,7 +36,7 @@ switch($opcion){
         $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
         break;
     case 5:
-        $consulta = "DELETE FROM mesas WHERE fvid = '$fvid'";
+        $consulta = "UPDATE mesas SET fvid = 53 , empid = 0 , mesaestado = 1 WHERE fvid = '$fvid'";
         $resultado= mysqli_query($conn, $consulta);     
 
         $consulta = "UPDATE facturasventas SET tipo = 0, empid = 0 WHERE fvid = '$fvid'";
@@ -51,14 +52,19 @@ switch($opcion){
         $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
         break;
     case 8: 
-        $consulta = "DELETE FROM mesas WHERE fvid = '$fvid'";
-        $resultado= mysqli_query($conn, $consulta);    
+        $consulta = "UPDATE mesas SET fvid = 53 , empid = 0 , mesaestado = 1 WHERE fvid = '$fvid'";
+        $resultado= mysqli_query($conn, $consulta);   
 
         $consulta = "UPDATE facturasventas SET is_check = 1 WHERE fvid = '$fvid'";
         $resultado= mysqli_query($conn, $consulta);
     case 9:
         $consulta = "SELECT mesaid,mesas.fvid,empnom, mesadescripcion, created_at, TIMESTAMPDIFF(minute, created_at, updated_at)AS Minutos, updated_at FROM mesas, empleados, tipomesaestados, facturasventas WHERE mesas.empid = empleados.empid AND mesaestado = mesatipoid AND mesatipoid = 2 AND mesas.fvid = facturasventas.fvid";
         $resultado= mysqli_query($conn, $consulta);     
+        $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+        break;
+    case 10:
+        $consulta = "SELECT mesaestado FROM mesas WHERE mesaid = '$mesaid'";
+        $resultado= mysqli_query($conn, $consulta);
         $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
         break;
     

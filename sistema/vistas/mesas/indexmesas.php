@@ -87,10 +87,6 @@ include ("../../procesos/check/check.php");
                                                                 <th>Factura de Venta</th>
                                                                 <th>Mozo</th>
                                                                 <th>Estado</th>
-                                                                <th>Creacion de Pedido</th>
-                                                                <th>Minutos</th>
-                                                                <th>Ultima Modificacion</th>
-                                                                <th>Acciones</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody class="table-light"></tbody>
@@ -113,9 +109,6 @@ include ("../../procesos/check/check.php");
                                                                 <th>Factura de Venta</th>
                                                                 <th>Mozo</th>
                                                                 <th>Estado</th>
-                                                                <th>Creacion de Pedido</th>
-                                                                <th>Minutos</th>
-                                                                <th>Ultima Modificacion</th>
                                                                 <th>Acciones</th>
                                                             </tr>
                                                         </thead>
@@ -139,9 +132,6 @@ include ("../../procesos/check/check.php");
                                                                 <th>Factura de Venta</th>
                                                                 <th>Mozo</th>
                                                                 <th>Estado</th>
-                                                                <th>Creacion de Pedido</th>
-                                                                <th>Minutos</th>
-                                                                <th>Ultima Modificacion</th>
                                                                 <th>Acciones</th>
                                                             </tr>
                                                         </thead>
