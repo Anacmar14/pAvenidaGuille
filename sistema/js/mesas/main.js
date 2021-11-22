@@ -28,12 +28,13 @@ $(document).ready(function () {
     }
   })
 
-  tablaDeliveryEnProceso();
-  tablaDeliveryFinalizada()
-  function tablaDeliveryEnProceso() {
-    $('#tablaDeliveryEnProceso').DataTable().destroy();
+  tablaMesasEnProceso();
+  tablaMesasOcuapada()
+  tablaMesasFinalizada()
+  function tablaMesasEnProceso() {
+    $('#tablaMesasEnProceso').DataTable().destroy();
     opcion = 2;
-    tablaProductos = $("#tablaDeliveryEnProceso").DataTable({
+    tablaProductos = $("#tablaMesasEnProceso").DataTable({
       lengthMenu: [[5], [5]],
       language: {
         "decimal": "",
@@ -56,7 +57,7 @@ $(document).ready(function () {
           }
       },
       ajax: {
-        url: "../../procesos/delivery/consDelivery.php",
+        url: "../../procesos/mesas/consMesas.php",
         method: "POST", //usamos el metodo POST
         data: { 
           opcion: opcion,
@@ -64,25 +65,73 @@ $(document).ready(function () {
         dataSrc: "",
       },
       columns: [
+        { data: "mesaid" },
+        { data: "empnom" },
+        { data: "empnom" },
+        { data: "empnom" },
+        { data: "empnom" },
+        { data: "empnom" },
+        { data: "empnom" },
+        { data: "empnom" },
+      ],
+    });
+
+  }
+
+  
+  function tablaMesasOcuapada() {
+    $('#tablaMesasOcupada').DataTable().destroy();
+    opcion = 9;
+    tablaProductos = $("#tablaMesasOcupada").DataTable({
+      lengthMenu: [[5], [5]],
+      language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Pedidos",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Pedidos",
+        "infoFiltered": "(Filtrado de _MAX_ total Pedidos)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Pedidos",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+          }
+      },
+      ajax: {
+        url: "../../procesos/mesas/consMesas.php",
+        method: "POST", //usamos el metodo POST
+        data: { 
+          opcion: opcion,
+        }, //enviamos opcion 3
+        dataSrc: "",
+      },
+      columns: [
+        { data: "mesaid" },
         { data: "fvid" },
         { data: "empnom" },
-        { data: "deliverydireccion" },
-        { data: "deliverydescripcion" },
+        { data: "mesadescripcion" },
         { data: "created_at" },
         { data: "Minutos" },
         { data: "updated_at" },
         { defaultContent:
-          "<div class='text-center'><button class='btn btn-secondary btn-sm btnEditarPedido' title='Editar Pedido'><i class='material-icons'>edit</i></button><button class='btn btn-danger btn-sm btnEliminarPedido' title='Eliminar Pedido'><i class='material-icons'>delete_outline</i></button></div>",
+          "<div class='text-center'><button class='btn btn-secondary btn-sm btnEditarPedido' title='Editar Mesa'><i class='material-icons'>edit</i></button><button class='btn btn-danger btn-sm btnEliminarMesa' title='Elimnar Mesa'><i class='material-icons'>delete_outline</i></button></div>",
       }
       ],
     });
 
   }
 
-  function tablaDeliveryFinalizada() {
-    $('#tablaDeliveryFinalizada').DataTable().destroy();
+  function tablaMesasFinalizada() {
+    $('#tablaMesasFinalizada').DataTable().destroy();
     opcion = 7;
-    tablaProductos = $("#tablaDeliveryFinalizada").DataTable({
+    tablaProductos = $("#tablaMesasFinalizada").DataTable({
       lengthMenu: [[5], [5]],
       language: {
         "decimal": "",
@@ -105,7 +154,7 @@ $(document).ready(function () {
           }
       },
       ajax: {
-        url: "../../procesos/delivery/consDelivery.php",
+        url: "../../procesos/mesas/consMesas.php",
         method: "POST", //usamos el metodo POST
         data: { 
           opcion: opcion,
@@ -113,26 +162,29 @@ $(document).ready(function () {
         dataSrc: "",
       },
       columns: [
+        { data: "mesaid" },
         { data: "fvid" },
         { data: "empnom" },
-        { data: "deliverydireccion" },
-        { data: "deliverydescripcion" },
+        { data: "mesadescripcion" },
         { data: "created_at" },
         { data: "Minutos" },
         { data: "updated_at" },
+        { defaultContent:
+          "<div class='text-center'><button class='btn btn-info btn-sm btnLiberarMesa' title='Liberar Mesa'><i class='material-icons'>done</i></button></div>",
+      }
       ],
     });
 
   }
 
-  $(document).on("click", "#addPedidoDelivery", function () {
-    deliveryid = $("#idDelivery").val();
-    deliverydireccion = $("#deliveryDireccion").val();
-    fvid = $("#deliveryFactura").val();
+  $(document).on("click", "#addPedidoMesa", function () {
+    mesaid = $("#idMesa").val();
+    mozo = $("#idMozo").val();
+    fvid = $("#mesaFactura").val();
 
     opcion = 0;
     $.ajax({
-        url:"../../procesos/delivery/consDelivery.php",
+        url:"../../procesos/mesas/consMesas.php",
         type:"POST",
         datatype:"JSON",
         data: {
@@ -145,18 +197,18 @@ $(document).ready(function () {
           if (tipo == 0) {
             opcion = 1;
             $.ajax({
-                url:"../../procesos/delivery/consDelivery.php",
+                url:"../../procesos/mesas/consMesas.php",
                 type:"POST",
                 datatype:"JSON",
                 data: {
                   opcion: opcion,
                   fvid: fvid,
-                  deliveryid: deliveryid,
-                  deliverydireccion: deliverydireccion,
+                  mesaid: mesaid,
+                  mozoid: mozo,
                 },
                 success: function (data) {
-                  tablaDeliveryEnProceso();
-                  tablaDeliveryFinalizada();
+                  tablaMesasEnProceso();
+                  tablaMesasFinalizada();
                 },
             })
           }
@@ -169,17 +221,17 @@ $(document).ready(function () {
         },
     })
 
-    $("#idDelivery").val('');
-    $("#deliveryDireccion").val('');
-    $("#deliveryFactura").val('');
+    $("#idMesa").val('');
+    $("#idMozo").val('');
+    $("#mesaFactura").val('');
   });
 
   $(document).on("click", ".btnEditarPedido", function () {
     opcion = 3
     fila = $(this).closest("tr");
-    fvid = fila.find("td:eq(0)").text();
+    fvid = fila.find("td:eq(1)").text();
     $.ajax({
-        url:"../../procesos/delivery/consDelivery.php",
+        url:"../../procesos/mesas/consMesas.php",
         type:"POST",
         datatype:"JSON",
         data: {
@@ -188,26 +240,25 @@ $(document).ready(function () {
         },
         success: function (data) {
           result = JSON.parse(data)
-          numeroestadoactual = result[0].deliveryestado
-          estadoactual = result[0].deliverydescripcion
+          numeroestadoactual = result[0].mesaestado
+          estadoactual = result[0].mesadescripcion
           factura = result[0].fvid
           $("#numeroDePedido").html(factura);
           $("#numeroDeFactura").val(factura);
-          $("#deliveryEstadoActual").val(estadoactual);
-          $("#DeliveryModal").css('display', 'flex');
+          $("#mesaEstadoActual").val(estadoactual);
+          $("#mesaModal").css('display', 'flex');
         }
     })
   });
 
   $(document).on("click", "#TerminarDeEditarPedido", function () {
     factura = $("#numeroDeFactura").val();
-    estadoactual = $("#deliveryEstadoActual").val();
-    estadonuevo = $("#deliveryEstadoNuevo").val();
-    console.log(estadonuevo)
-    if (estadonuevo != 4){
+    estadoactual = $("#mesaEstadoActual").val();
+    estadonuevo = $("#mesaEstadoNuevo").val();
+    if (estadonuevo != 3){
     opcion = 4
       $.ajax({
-        url:"../../procesos/delivery/consDelivery.php",
+        url:"../../procesos/mesas/consMesas.php",
         type:"POST",
         datatype:"JSON",
         data: {
@@ -216,17 +267,18 @@ $(document).ready(function () {
           estado: estadonuevo,
         },
         success: function (data) {
-          $("#DeliveryModal").css('display', 'none');
-          $("#deliveryEstadoNuevo").val('');
-          tablaDeliveryEnProceso();
-          tablaDeliveryFinalizada();
+          $("#mesaModal").css('display', 'none');
+          $("#mesaEstadoNuevo").val('');
+          tablaMesasEnProceso();
+          tablaMesasFinalizada();
+          tablaMesasOcuapada();
         }
       })
     }
     else {
       opcion = 6
       $.ajax({
-        url:"../../procesos/delivery/consDelivery.php",
+        url:"../../procesos/mesas/consMesas.php",
         type:"POST",
         datatype:"JSON",
         data: {
@@ -235,26 +287,47 @@ $(document).ready(function () {
           estado: estadonuevo,
         },
         success: function (data) {
-          $("#DeliveryModal").css('display', 'none');
-          $("#deliveryEstadoNuevo").val('');
-          tablaDeliveryEnProceso();
-          tablaDeliveryFinalizada();
+          $("#mesaModal").css('display', 'none');
+          $("#mesaEstadoNuevo").val('');
+          tablaMesasEnProceso();
+          tablaMesasFinalizada();
+          tablaMesasOcuapada();
         }
       })
     } 
   })
 
-  $(document).on("click", "#cerrarDelivery", function () {
-    $("#DeliveryModal").css('display', 'none');
-    $("#deliveryEstadoNuevo").val('');
+  $(document).on("click", "#cerrarMesa", function () {
+    $("#mesaModal").css('display', 'none');
+    $("#mesaEstadoNuevo").val('');
   })
 
   $(document).on("click", ".btnEliminarPedido", function () {
-    opcion = 5
+      opcion = 5
+      fila = $(this).closest("tr");
+      fvid = fila.find("td:eq(1)").text();
+      $.ajax({
+        url:"../../procesos/mesas/consMesas.php",
+        type:"POST",
+        datatype:"JSON",
+        data: {
+          opcion: opcion,
+          fvid: fvid,
+        },
+        success: function (data) {
+          tablaMesasEnProceso();
+          tablaMesasFinalizada();
+          tablaMesasOcuapada();
+      }
+    })
+  })
+
+  $(document).on("click", ".btnLiberarMesa", function () {
+    opcion = 8
     fila = $(this).closest("tr");
-    fvid = fila.find("td:eq(0)").text();
+    fvid = fila.find("td:eq(1)").text();
     $.ajax({
-      url:"../../procesos/delivery/consDelivery.php",
+      url:"../../procesos/mesas/consMesas.php",
       type:"POST",
       datatype:"JSON",
       data: {
@@ -262,8 +335,9 @@ $(document).ready(function () {
         fvid: fvid,
       },
       success: function (data) {
-        tablaDeliveryEnProceso();
-        tablaDeliveryFinalizada();
+        tablaMesasEnProceso();
+        tablaMesasFinalizada();
+        tablaMesasOcuapada();
     }
   })
 })

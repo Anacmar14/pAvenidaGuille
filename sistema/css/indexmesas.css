@@ -6,27 +6,34 @@ a {
     display: none;
 }
 
-#DeliveryModal{
-    position: absolute;
-    padding: 500px;
-    top:0;
+#mesaModal{
+    top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    position: absolute;
+    width: auto;
+    height: auto;
+    padding: 346px;
+    padding-right: 61%;
+    /* padding-top: 300px;
+    padding-bottom: 1080px;
+    padding-right: auto;
+    padding-left: 800px; */
     background: rgba(75, 75, 75, 0.452);
-    z-index: 99999;
+    z-index: 99998;
     display: none;
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.drowerDelivery{
+.drowerMesa{
+    width: 100%;
+    height: 100%;
     background: white;
     border-radius: 8px;
     padding: 10px;
 }
 
-#cerrarDelivery {
+#cerrarMesa {
     width: 40px;
 }

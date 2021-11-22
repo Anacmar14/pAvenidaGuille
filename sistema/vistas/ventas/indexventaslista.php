@@ -47,6 +47,11 @@ include ("../../procesos/check/check.php");
                                         data-bs-target="#profile" type="button" role="tab"
                                         aria-controls="profile" aria-selected="false">DELIVERY</button>
                                 </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="profile2-tab" data-bs-toggle="tab"
+                                        data-bs-target="#profile2" type="button" role="tab"
+                                        aria-controls="profile2" aria-selected="false">MESAS</button>
+                                </li>
                             </ul>
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="p-2 flex-grow-1 bd-highlight">
@@ -87,6 +92,34 @@ include ("../../procesos/check/check.php");
                                                             <th>Cliente</th>
                                                             <th>Total</th>
                                                             <th>Tipo</th>
+                                                            <th>Empleado</th>
+                                                            <th>Estado</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="table-light"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile2" role="tabpanel" aria-labelledby="profile2-tab">
+                                <div class="p-2 flex-grow-1 bd-highlight">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="table-responsive">
+                                                <table id="tablaListaVentasMesa" class="table table-striped" style="width:100%">
+
+                                                    <thead class="thead-dark">
+                                                        <tr>
+                                                            <th>Folio</th>
+                                                            <th>Caja</th>
+                                                            <th>Fecha</th>
+                                                            <th>Cliente</th>
+                                                            <th>Total</th>
+                                                            <th>Tipo</th>
+                                                            <th>Numero</th>
                                                             <th>Empleado</th>
                                                             <th>Estado</th>
                                                             <th>Acciones</th>

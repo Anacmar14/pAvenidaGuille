@@ -62,6 +62,9 @@
                 <li class="od">
                   <a href="../../../sistema/vistas/delivery/indexdelivery.php"><i class="fas fa-motorcycle"></i>Delivery</a>
                 </li>
+                <li class="od">
+                  <a href="../../../sistema/vistas/mesas/indexmesas.php"><i class="fas fa-border-all"></i>Mesas</a>
+                </li>
             </ul>
         </li>
         <!-- FIN VENTAS -->
@@ -86,7 +89,7 @@
             <a href="#"><i class="fa fa-money"></i> Caja <span class="arrow"></span></a>
             <ul class="list-unstyled sub-menu collapse" style="margin-left:20px" id="caja">
             <li class="od">
-                <a href="../../../sistema/vistas/cajas/indexcajas.php"><i class="fas fa-box"></i>Caja</a>
+                <a href="../../../sistema/vistas/cajas/indexcajas.php"><i class="fas fa-cash-register"></i>Caja</a>
             </li>
               <li class="od oc">
                 <a href="../../../sistema/vistas/movimientos/indexmovimientos.php"><i class="fas fa-sync"></i>Movimientos</a>
@@ -95,14 +98,14 @@
         </li>
         <!-- FIN CAJA -->
         <li  data-toggle="collapse" data-target="#products" class="collapsed">
-            <a href="#"><i class="fa fa-gift fa-lg"></i> Productos <span class="arrow"></span></a>
+            <a href="#"><i class="fas fa-dolly"></i> Productos <span class="arrow"></span></a>
                 </li>
                 <ul class="list-unstyled sub-menu collapse" style="margin-left:20px" id="products">
                 <li>
                     <a href="../../../sistema/vistas/articulos/indexarticulos.php "><i class="fas fa-shopping-basket"></i>Productos</a>
                 </li>
                 <li class="oc">
-                    <a href="../../../sistema/vistas/categorias/indexcategorias.php"><i class="fas fa-dolly"></i>Categorias</a>
+                    <a href="../../../sistema/vistas/categorias/indexcategorias.php"><i class="fas fa-book"></i>Categorias</a>
                 </li>
               </ul>
         </li>

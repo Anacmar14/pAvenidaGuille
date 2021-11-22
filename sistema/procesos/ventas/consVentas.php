@@ -60,6 +60,11 @@ switch($opcion){
         $resultado= mysqli_query($conn, $consulta);     
         $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
         break;
+    case 10: // select de historial de ventas con delivery
+        $consulta = "SELECT facturasventas.fvid, cjid, fvfechahora, clnom, fvtotal, ventadesc, mesaid, empnom, mesadescripcion FROM facturasventas INNER JOIN clientes ON facturasventas.clid = clientes.clid AND is_delete = 0 AND is_check = 0 INNER JOIN tipoventa ON tipo = ventaid INNER JOIN empleados ON facturasventas.empid = empleados.empid INNER JOIN mesas ON mesas.fvid = facturasventas.fvid INNER JOIN tipomesaestados ON mesas.mesaestado = tipomesaestados.mesatipoid";
+        $resultado= mysqli_query($conn, $consulta);     
+        $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+        break;
 }
 
 print json_encode($data, JSON_UNESCAPED_UNICODE); //enviar el array final en formato json a JS

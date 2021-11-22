@@ -20,7 +20,7 @@ switch($opcion){
         $resultado= mysqli_query($conn, $consulta);
         break;
     case 2:
-        $consulta = "SELECT fvid,deliverydireccion,empnom, deliverydescripcion, created_at, TIMESTAMPDIFF(minute, created_at, updated_at)AS Minutos, updated_at FROM delivery, empleados, deliverytiposestados WHERE delivery.empid = empleados.empid AND deliveryestado = deliverytipo";
+        $consulta = "SELECT delivery.fvid,deliverydireccion,empnom, deliverydescripcion, created_at, TIMESTAMPDIFF(minute, created_at, updated_at)AS Minutos, updated_at FROM delivery, empleados, deliverytiposestados, facturasventas WHERE delivery.empid = empleados.empid AND deliveryestado = deliverytipo AND deliverytipo != 4 AND is_check = 0 AND is_delete = 0 AND delivery.fvid = facturasventas.fvid";
         $resultado= mysqli_query($conn, $consulta);     
         $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
         break;
@@ -42,11 +42,16 @@ switch($opcion){
         $resultado= mysqli_query($conn, $consulta);
         break;
     case 6:
-        $consulta = "DELETE FROM delivery WHERE fvid = '$fvid'";
+        $consulta = "UPDATE delivery SET deliveryestado = '$estado', updated_at = CURRENT_TIME WHERE fvid = '$fvid'";
         $resultado= mysqli_query($conn, $consulta);     
 
         $consulta = "UPDATE facturasventas SET is_check = 1 WHERE fvid = '$fvid'";
         $resultado= mysqli_query($conn, $consulta);
+        break;
+    case 7:
+        $consulta = "SELECT delivery.fvid,deliverydireccion,empnom, deliverydescripcion, created_at, TIMESTAMPDIFF(minute, created_at, updated_at)AS Minutos, updated_at FROM delivery, empleados, deliverytiposestados, facturasventas WHERE delivery.empid = empleados.empid AND deliveryestado = deliverytipo AND deliverytipo = 4 AND delivery.fvid = facturasventas.fvid";
+        $resultado= mysqli_query($conn, $consulta);     
+        $data= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
         break;
 }
 

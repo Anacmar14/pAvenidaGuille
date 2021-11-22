@@ -36,12 +36,9 @@
 
 	datosX=crearCadenaBarras('<?php echo $datosX ?>');
 	datosY=crearCadenaBarras('<?php echo $datosY ?>');
-	a = datosX[0]; 
-	b = datosX[1];
-	c = datosX[2];  
 		var data = [{
 		values: datosY,
-		labels: [a, b, c],
+		labels: datosX,
 		type: 'pie'
 	}];
 
