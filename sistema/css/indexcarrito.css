@@ -1,15 +1,18 @@
 a {
     text-decoration: none;
 }
-.container, .mensajeCajaCerrada{
+
+.abiertoCaja, .mensajeCajaCerrada {
     display: none;
 }
-.descuento, .totalt, .proveedorDiv{
+
+
+.descuento, .totalt, .clientediv{
     display: flex;
     align-items: center;
 }
 
-#total, #tablaProveedorProv, #proveedorModalLabel, #totalModalLabel, #subTotalModalLabel, #facturaModalLabel {
+#total, #tablaClientesCli, #clienteModalLabel, #totalModalLabel, #subTotalModalLabel, #facturaModalLabel, #descuentoModalLabel {
     margin-bottom: 0;
 }
 
@@ -18,7 +21,7 @@ a {
     margin: 10px;
 }
 
-#facturaModalLabel, #proveedorModalLabel {
+#facturaModalLabel, #clienteModalLabel {
     width: auto;
 }
 
@@ -33,6 +36,12 @@ a {
     align-items: center;
     margin-right: 0px;
     margin-bottom: 10px;
+}
+
+.descuentoDivCol {
+    display: flex;
+    align-items: center;
+    margin-left: 0px;
 }
 
 #totalModalLabel, #subTotalModalLabel {
@@ -56,7 +65,7 @@ a {
     display: none;
     align-items: center;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 #backModalDos{
@@ -69,20 +78,7 @@ a {
     display: none;
     align-items: center;
     flex-direction: column;
-    justify-content: space-between;
-}
-
-#backModalCompras{
-    position: absolute;
-    top: 0;
-    background: rgba(75, 75, 75, 0.452);
-    height: 100%;
-    width: 100%;
-    z-index: 99998;
-    display: none;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .drower{
@@ -91,13 +87,7 @@ a {
     border-radius: 8px;
 }
 
-.drowerCompras{
-    width: 30%;
-    background: white;
-    border-radius: 8px;
-}
-
-#botoncModal, #cerrarDrawerCompra, #cerrarDrawerCompras, #cerrarDrawerImprimir, #botonImprimirModal{
+#botoncModal, #cerrarDrawerVenta, #cerrarDrawerImprimir, #botonImprimirModal{
     padding: 8px;
     margin: 8px;
 }
@@ -114,7 +104,7 @@ a {
     margin-top: 10px;
 }
 
-.tituloCompras {
+.tituloTicket {
     padding: 8px;
     margin: 8px;
 }
@@ -145,12 +135,6 @@ a {
     justify-content: end;
 }
 
-.footerModalCompras {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
 .tituloCompraEfectuada {
     padding: 8px;
     margin: 8px;
@@ -163,33 +147,7 @@ a {
     font-size: 23px;
 }
 
-#profile-tab, #home-tab {
+#profile-tab, #home-tab, #plato-tab{
     color: #212529;
     font-weight: initial;
-    width: auto;
-}
-
-.custom-select.custom-select-sm.form-control.form-control-sm {
-    width: 56px;
-}
-
-#mensaje {
-    font-size: 15px;
-    font-weight: bold;
-    color: white;
-    background: orangered;
-    text-align: center;
-}
-
-#mensaje2 {
-    display: none;
-    font-size: 15px;
-    font-weight: bold;
-    color: white;
-    background: orangered;
-    text-align: center;
-}
-
-#btnCambiarProveedor {
-    display: none;
 }

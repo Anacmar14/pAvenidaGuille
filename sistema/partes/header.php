@@ -30,7 +30,7 @@
           <i class="fas fa-sign-out-alt"></i>
           Cerrar sesion<span class="sr-only">(current) </span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item od">
           <a class="nav-link" id="link" href="../resto/perfil.php">
           <i class="fas fa-id-card"></i>Perfil</a>
         </li>
@@ -47,7 +47,7 @@
       <ul class="list-unstyled components" style="margin-top: -20px;">
         
         <!-- VENTAS -->
-        <li  data-toggle="collapse" data-target="#ventas" class="collapsed">
+        <li  data-toggle="collapse" data-target="#ventas" class="collapsed od">
             <a href="#"><i class="fas fa-shopping-cart"></i> Ventas <span class="arrow"></span></a>
             <ul class="list-unstyled sub-menu collapse" style="margin-left:20px" id="ventas">
                 <li class="od">
@@ -69,7 +69,7 @@
         </li>
         <!-- FIN VENTAS -->
         <!-- COMPRAS -->
-        <li  data-toggle="collapse" data-target="#compras" class="collapsed">
+        <li  data-toggle="collapse" data-target="#compras" class="collapsed od">
             <a href="#"><i class="fas fa-shopping-cart"></i> Compras <span class="arrow"></span></a>
             <ul class="list-unstyled sub-menu collapse" style="margin-left:20px" id="compras">
               <li class="od">
@@ -85,7 +85,7 @@
         </li>
         <!-- FIN COMPRAS -->
         <!-- CAJA -->
-        <li  data-toggle="collapse" data-target="#caja" class="collapsed">
+        <li  data-toggle="collapse" data-target="#caja" class="collapsed od">
             <a href="#"><i class="fa fa-money"></i> Caja <span class="arrow"></span></a>
             <ul class="list-unstyled sub-menu collapse" style="margin-left:20px" id="caja">
             <li class="od">
@@ -97,11 +97,11 @@
             </ul>
         </li>
         <!-- FIN CAJA -->
-        <li  data-toggle="collapse" data-target="#products" class="collapsed">
+        <li  data-toggle="collapse" data-target="#products" class="collapsed od">
             <a href="#"><i class="fas fa-dolly"></i> Productos <span class="arrow"></span></a>
                 </li>
                 <ul class="list-unstyled sub-menu collapse" style="margin-left:20px" id="products">
-                <li>
+                <li class="od">
                     <a href="../../../sistema/vistas/articulos/indexarticulos.php "><i class="fas fa-shopping-basket"></i>Productos</a>
                 </li>
                 <li class="oc">
@@ -110,22 +110,27 @@
               </ul>
         </li>
         <!-- PROVEEDORES -->
-        <li class="oc">
+        <li class="oc od">
           <a href="../../../sistema/vistas/proveedores/indexproveedores.php"><i class="fas fa-hands-helping"></i>Proveedores</a>
         </li>
         <!-- FIN PROVEEDORES -->
         <!-- CLIENTES -->
-        <li class="od">
-          <a href="../../../sistema/vistas/clientes/indexclientes.php"><i class="fas fa-user-friends"></i>Clientes</a>
+
+        <li  data-toggle="collapse" data-target="#clientes" class="collapsed od">
+            <a href="#"><i class="fas fa-user-friends"></i>Clientes<span class="arrow"></span></a>
+                </li>
+                <ul class="list-unstyled sub-menu collapse" style="margin-left:20px" id="clientes">
+                <li class="od">
+                  <a href="../../../sistema/vistas/clientes/indexclientes.php"><i class="fas fa-user-friends"></i>Clientes</a>
+                </li>
+              </ul>
         </li>
-        <!-- FIN CLIENTES -->
-        <!-- CLIENTES -->
-        <li class="od">
+        <li class="oc">
           <a href="../../../sistema/vistas/cliente/indexclientecarrito.php"><i class="fas fa-shopping-cart"></i>Carrito de Clientes</a>
         </li>
         <!-- FIN CLIENTES -->
         <!-- REPORTES -->
-        <li>
+        <li class="od">
           <a href="../../../sistema/vistas/reportes/indexreportes.php"><i class="fas fa-chart-bar"></i>Reportes</a>
         </li>
         <!-- FIN REPORTES -->

@@ -45,7 +45,7 @@ include ("../../procesos/check/check.php");
             </form> -->
 
             </div>
-            <div class="col-md-4 ov">
+            <div class="col-md-4 oc">
 
                 <?php if(isset($_SESSION['message'])) { ?>
                 <div class="alert alert-<?= $_SESSION['message_type'] ?> alert-dismissible fade show" role="alert">

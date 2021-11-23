@@ -6,7 +6,7 @@ if (isset($_SESSION['rol'])){
         case 0:
             include ('../../partes/ocultarusuarios.php');
             break;
-        case 3:
+        case 12:
             include ('../../partes/ocultardeposito.php');
             break;
         case 2:
